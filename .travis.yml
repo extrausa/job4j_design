@@ -3,6 +3,9 @@ language: java
 jdk:
  - openjdk15
 
+script:
+ - mvn test -B
+
 sudo: false
 
 env:
