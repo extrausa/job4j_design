@@ -15,31 +15,39 @@ public class MatrixIt implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
+        for (int i = 0; i < data.length; i++) {
 
-       //return  column < data[row].length && row < data.length;
-        if (row + 1 == data.length) {
-            return column < data[row].length;
+            for (int j = 0; j < data[i].length; j++) {
+
+                if (row + 1 == data.length) {
+                        return column < data[row].length;
+                }
+                if (column >= data[row].length && (row >= data.length || row == data.length - 1)) {
+                        return false;
+                }
+
+            }
+            if (i == data.length - 1 && data[i].length == 0) {
+                return false;
+            }
         }
-        if (row == data.length - 1 && column == data[row].length - 1) {
-            return false;
-        }
-
-        return  row < data.length;
-
+        return  true;
     }
 
+    @SuppressWarnings("checkstyle:WhitespaceAround")
     @Override
     public Integer next() {
-        if (column == data[row].length) {
+        if (!hasNext()) {
+            throw new NoSuchElementException();
+        }
+        if (column == data[row].length && row < data.length) {
+            row = data.length - 1;
+            column = 0;
+        }
+        if (column >= data[row].length) {
             row++;
             column = 0;
         }
-        if (!hasNext()) {
-
-            throw new NoSuchElementException();
-        }
-        //column++;
-
         return data[row][column++];
     }
 }

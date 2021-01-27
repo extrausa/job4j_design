@@ -85,11 +85,10 @@ public class MatrixItTest {
         assertThat(it.hasNext(), is(true));
     }
 
-//    @Test
-//    public void whenNoElements() {
-//        int[][] in = {{}, {}, {}};
-//        MatrixIt it = new MatrixIt(in);
-//        assertThat(it.hasNext(), is(false));
-//    }
-
+    @Test
+    public void whenNoElements() {
+        int[][] in = {{}, {}, {}};
+        MatrixIt it = new MatrixIt(in);
+        assertThat(it.hasNext(), is(false));
+    }
 }
