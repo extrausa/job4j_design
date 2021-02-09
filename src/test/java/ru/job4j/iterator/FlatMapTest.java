@@ -61,6 +61,4 @@ public class FlatMapTest {
         flat.next();
     }
 
-
-
 }
