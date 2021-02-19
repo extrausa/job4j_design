@@ -9,48 +9,30 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
     private T[] elements;
     private int size;
+    public int count = 0;
 
     public SimpleArray(int size) {
         this.size = size;
         elements = (T[]) new Object[size];
     }
     
-    private int indexOfNull(T[] array) {
-        int result = -1;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                result = i;
-                break;
-            }
-        }
-        return result;
-    }
-    
     public void add (T model) {
-        int number = indexOfNull(elements);
-        if (number > -1) {
-            elements[number] = model;
-        } else {
-            elements[number] = null;
-        }
+        elements[count++] = model;
     }
 
     public void set(int index, T model) {
-        int size = elements.length;
-        Objects.checkIndex(index - 1, size);
+        Objects.checkIndex(index - 1, count);
         elements[index - 1] = model;
 
     }
 
     public void remove(int index) {
-        T[] arrayNew = (T[]) new Object[elements.length - 1];
-        System.arraycopy(elements, 0, arrayNew, 0, index - 1);
-        System.arraycopy(elements, (index - 1) + 1, arrayNew, index - 1, elements.length - (index - 1) - 1);
-        elements = arrayNew;
+        Objects.checkIndex(index - 1, count);
+        System.arraycopy(elements, index, elements, index - 1,  size - index - 1);
     }
 
     public T get(int index) {
-        Objects.checkIndex(index - 1, size);
+        Objects.checkIndex(index - 1, count);
         return elements[index - 1];
     }
     @Override
@@ -60,7 +42,7 @@ public class SimpleArray<T> implements Iterable<T> {
             private int currentIndex = 0;
             @Override
             public boolean hasNext() {
-                return currentIndex < elements.length;
+                return currentIndex < count;
             }
 
             @Override
