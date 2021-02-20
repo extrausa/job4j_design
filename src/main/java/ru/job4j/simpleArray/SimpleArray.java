@@ -21,19 +21,20 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void set(int index, T model) {
-        Objects.checkIndex(index - 1, count);
-        elements[index - 1] = model;
+        Objects.checkIndex(index, count);
+        elements[index] = model;
 
     }
 
     public void remove(int index) {
-        Objects.checkIndex(index - 1, count);
+        Objects.checkIndex(index, count);
         System.arraycopy(elements, index, elements, index - 1,  size - index - 1);
+        count--;
     }
 
     public T get(int index) {
-        Objects.checkIndex(index - 1, count);
-        return elements[index - 1];
+        Objects.checkIndex(index, count);
+        return elements[index];
     }
     @Override
     public Iterator<T> iterator() {
