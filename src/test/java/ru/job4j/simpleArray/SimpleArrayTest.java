@@ -12,16 +12,40 @@ public class SimpleArrayTest {
     @Test
     public void addTest() {
         SimpleArray<Integer> first = new SimpleArray<>(5);
-        first.add(1);
-        first.add(2);
-        first.add(3);
-        first.add(4);
         first.add(5);
-
-        Integer[] test = new Integer[]{1, 2, 3, 4, 5};
-        assertThat(first.iterator().next(), is(test));
+        int[] tester = new int[] {5};
+        assertThat(first.iterator().next(), is(tester[0]));
 
     }
 
+    @Test
+    public void removeTest() {
+        SimpleArray<Integer> first = new SimpleArray<>(5);
+        first.add(5);
+        first.add(6);
+        first.remove(1);
+        int[] tester = new int[] {6};
+        assertThat(first.iterator().next(), is(tester[0]));
+
+    }
+
+    @Test
+    public void setTest() {
+        SimpleArray<Integer> first = new SimpleArray<>(5);
+        first.add(5);
+        first.set(0, 9);
+        int[] tester = new int[] {9};
+        assertThat(first.iterator().next(), is(tester[0]));
+
+    }
+
+    @Test
+    public void getTest() {
+        SimpleArray<Integer> first = new SimpleArray<>(5);
+        first.add(5);
+        int[] tester = new int[] {5};
+        assertThat(first.get(0), is(tester[0]));
+
+    }
 
 }
