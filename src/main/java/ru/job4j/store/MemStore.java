@@ -7,12 +7,6 @@ import java.util.Objects;
 public final class MemStore<T extends Base> implements Store<T> {
     private final List<T> mem = new ArrayList<>();
 
-    private int position(String id) {
-        int position = -1;
-        position = mem.indexOf(id);
-        return position;
-    }
-
     @Override
     public void add(T model) {
         mem.add(model);
@@ -20,30 +14,32 @@ public final class MemStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        int position = position(id);
-        if (position == -1) {
-            return false;
-        } else {
-            mem.set(position, model);
-            return true;
+        for (int i = 0; i < mem.size(); i++) {
+            if (mem.get(i).getId().equals(id)) {
+                mem.set(i, model);
+                return true;
+            }
         }
+        return false;
     }
 
     @Override
     public boolean delete(String id) {
-        int position = position(id);
-        if (position != -1) {
-            mem.remove(position);
-            return true;
+        for (int i = 0; i < mem.size(); i++) {
+            if (mem.get(i).getId().equals(id)) {
+                mem.remove(i);
+                return true;
+            }
         }
         return false;
     }
 
     @Override
     public T findById(String id) {
-        int position = position(id);
-        if (position != -1) {
-            return mem.get(position);
+        for (int i = 0; i < mem.size(); i++) {
+            if (mem.get(i).getId().equals(id)) {
+                return mem.get(i);
+            }
         }
         return null;
     }
