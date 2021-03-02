@@ -1,5 +1,7 @@
 package ru.job4j.store;
 
+import java.util.Objects;
+
 public class UserStore implements Store<User> {
 
     private final Store<User> store = new MemStore<>();
@@ -33,5 +35,18 @@ public class UserStore implements Store<User> {
             return store.findById(id);
         }
         return null;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserStore userStore = (UserStore) o;
+        return Objects.equals(store, userStore.store);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(store);
     }
 }
