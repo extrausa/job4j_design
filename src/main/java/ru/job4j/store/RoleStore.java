@@ -9,28 +9,41 @@ public class RoleStore implements Store<Role> {
 
     @Override
     public void add(Role model) {
-
+        store.add(model);
     }
 
     @Override
     public boolean replace(String id, Role model) {
+        if (store.replace(id, model)) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean delete(String id) {
+        if (store.delete(id)) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public Role findById(String id) {
+        if (store.findById(id) != null) {
+            return store.findById(id);
+        }
         return null;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         RoleStore roleStore = (RoleStore) o;
         return Objects.equals(store, roleStore.store);
     }

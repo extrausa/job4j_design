@@ -16,7 +16,6 @@ public class UserStore implements Store<User> {
         if (store.replace(id, model)) {
             return true;
         }
-
         return false;
     }
 
@@ -25,7 +24,6 @@ public class UserStore implements Store<User> {
         if (store.delete(id)) {
             return true;
         }
-
         return false;
     }
 
@@ -39,8 +37,12 @@ public class UserStore implements Store<User> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         UserStore userStore = (UserStore) o;
         return Objects.equals(store, userStore.store);
     }
