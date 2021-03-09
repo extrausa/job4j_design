@@ -1,5 +1,6 @@
 package ru.job4j.simpleArray;
 //1. Динамический список на массиве. [#455135]
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class SimpleArrayNew<T> implements Iterable<T> {
@@ -10,9 +11,9 @@ public class SimpleArrayNew<T> implements Iterable<T> {
     private int modCount;
 
     public SimpleArrayNew(int initialCapacity) {
-        if (initialCapacity <= 0) {
-            throw new IllegalArgumentException();
-        }
+//        if (initialCapacity <= 0) {
+//            throw new IllegalArgumentException();
+//        }
         elementData = new Object[initialCapacity];
     }
 
@@ -28,23 +29,20 @@ public class SimpleArrayNew<T> implements Iterable<T> {
 
     public boolean add(T e) {
         modCount++;
-        add(e, elementData, size);
+        add(e, elementData);
         return true;
     }
 
-    private void add(T e, Object[] elementData, int s) {
-        if (s == elementData.length) {
+    private void add(T e, Object[] elementData) {
+        if (size == elementData.length) {
             elementData = grow();
         }
-        elementData[s] = e;
-        size = ++s;
+        elementData[size] = e;
+        ++size;
     }
 
     private Object[] grow() {
-        Object[] newElementData = new Object[elementData.length * 2];
-        System.arraycopy(elementData, 0, newElementData, 0, size);
-        elementData = newElementData;
-        return elementData;
+        return Arrays.copyOf(elementData, elementData.length * 2);
     }
 
     @Override
