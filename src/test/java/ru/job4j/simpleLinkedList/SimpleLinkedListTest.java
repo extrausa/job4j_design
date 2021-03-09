@@ -27,7 +27,7 @@ public class SimpleLinkedListTest {
         array.addLast("second");
         array.addFirst("throw");
         array.addLast("4th");
-        String rsl = array.iterator().next();
+        String rsl = array.iterator().next(); // почему не видит???
         assertThat(rsl, is("first"));
     }
 
