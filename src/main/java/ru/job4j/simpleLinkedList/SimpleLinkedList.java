@@ -3,10 +3,10 @@ package ru.job4j.simpleLinkedList;
 import java.util.*;
 
 public class SimpleLinkedList<E> implements Iterable<E>, Linked<E> {
-    transient int size = 0;
-    transient int modCount;
-    transient Node<E> first;
-    transient Node<E> last;
+    private int size = 0;
+    private int modCount;
+    private Node<E> first;
+    private Node<E> last;
 
     public SimpleLinkedList() {
         last = new Node<E>(first, null, null);
@@ -96,6 +96,7 @@ public class SimpleLinkedList<E> implements Iterable<E>, Linked<E> {
         Iterator<E> it = new Iterator<E>() {
             private int currentIndex = 0;
             private int expectedModCount = modCount;
+            private Node<E> current = first;
             @Override
             public boolean hasNext() {
                 return currentIndex < size;
@@ -110,7 +111,8 @@ public class SimpleLinkedList<E> implements Iterable<E>, Linked<E> {
                     throw new ConcurrentModificationException();
                 }
                 currentIndex++;
-                return (E) first.getNext();
+                current = current.next;
+                return current.item;
             }
         };
 

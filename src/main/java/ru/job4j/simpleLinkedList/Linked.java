@@ -1,6 +1,6 @@
 package ru.job4j.simpleLinkedList;
 
-public interface Linked<E> {
+public interface Linked<E> extends Iterable<E> {
 
     void addLast(E element);
 
