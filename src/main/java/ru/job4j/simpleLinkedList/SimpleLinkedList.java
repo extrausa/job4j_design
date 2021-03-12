@@ -111,8 +111,9 @@ public class SimpleLinkedList<E> implements Iterable<E>, Linked<E> {
                     throw new ConcurrentModificationException();
                 }
                 currentIndex++;
+                E value = current.item;
                 current = current.next;
-                return current.item;
+                return value;
             }
         };
 
