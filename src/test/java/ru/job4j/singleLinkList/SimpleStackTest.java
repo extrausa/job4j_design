@@ -28,7 +28,6 @@ public class SimpleStackTest {
 
         stack.push(1);
         stack.push(2);
-       //stack.pushEnd(4);
         stack.push(3);
         stack.display();
         //stack.pop();

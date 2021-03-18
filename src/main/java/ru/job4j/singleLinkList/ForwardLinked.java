@@ -17,6 +17,19 @@ public class ForwardLinked<T> implements Iterable<T> {
             head = node;
             return;
         }
+        Node<T> tail = head;
+        while (tail.next != null) {
+            tail = tail.next;
+        }
+        tail.next = node;
+    }
+
+    public void addFirst(T value) {
+        Node<T> node = new Node<T>(value, null);
+        if (head == null) {
+            head = node;
+            return;
+        }
         node.next = head;
         head = node;
 
@@ -38,20 +51,28 @@ public class ForwardLinked<T> implements Iterable<T> {
        return first.value;
     }
 
-    public void addLast(T value) {
-        Node<T> node = new Node<T>(value, null);
-        //Node<T> tail = head;
-        if (isEmpty()) {
-            head = node;
-            return;
-        }
-
-    }
-
-    public  T deleteLast() {
-        Node<T> temp = head.next;
-        return null;
-    }
+//    public void addLast(T value) {
+//        Node<T> node = new Node<T>(value, null);
+//        //Node<T> tail = head;
+//        if (isEmpty()) {
+//            head = node;
+//            return;
+//        }
+//        while (head.next != null) {
+//
+//            if (head.next == null) {
+//                head.next = node;
+//                head = head.next;
+//                return;
+//            }
+//            head = head.next;
+//        }
+//    }
+//
+//    public  T deleteLast() {
+//        Node<T> temp = head.next;
+//        return null;
+//    }
 
     public void dispalyNode() {
         System.out.println("Node (first --> last): ");

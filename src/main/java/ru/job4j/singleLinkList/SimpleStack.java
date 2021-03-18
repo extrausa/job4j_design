@@ -12,12 +12,12 @@ public class SimpleStack<T> {
     }
 
     public void push(T value) {
-        linked.add(value);
+        linked.addFirst(value);
     }
 
-    public void pushEnd(T value) {
-        linked.addLast(value);
-    }
+//    public void pushEnd(T value) {
+//        linked.addLast(value);
+//    }
 
     public void display() {
         linked.dispalyNode();
