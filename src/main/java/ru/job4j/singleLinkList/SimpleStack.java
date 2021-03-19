@@ -18,6 +18,9 @@ public class SimpleStack<T> {
 //    public void pushEnd(T value) {
 //        linked.addLast(value);
 //    }
+    public int size() {
+        return linked.size();
+    }
 
     public void display() {
         linked.dispalyNode();
