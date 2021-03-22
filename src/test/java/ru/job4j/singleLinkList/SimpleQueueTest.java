@@ -53,7 +53,7 @@ public class SimpleQueueTest {
 
         queue.push(3);
 
-        assertThat(queue.poll(), is(2));// тут ошибка мы ожидаем 3 а не 2
+        assertThat(queue.poll(), is(2));
         queue.displayOut();
     }
 }
