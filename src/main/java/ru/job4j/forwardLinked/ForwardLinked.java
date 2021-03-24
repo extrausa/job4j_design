@@ -6,11 +6,13 @@ import java.util.NoSuchElementException;
 public class ForwardLinked<T> implements Iterable<T> {
 
     private Node<T> head;
+    int count = 0;
 
     public void add(T value) {
         Node<T> node = new Node<T>(value, null);
         if (head == null) {
             head = node;
+            count++;
             return;
         }
         Node<T> tail = head;
@@ -18,11 +20,38 @@ public class ForwardLinked<T> implements Iterable<T> {
             tail = tail.next;
         }
         tail.next = node;
+        count++;
     }
 
     public boolean revert() {
-        //TODO impl reverts of linked list.
-        return false;
+        Node<T> headFirst = head;
+        Node<T> tail = head.next;
+        Node<T> third = tail.next;
+
+        headFirst.next = null;
+        tail.next = headFirst;
+
+        Node<T> current = third; // текущий
+        Node<T> previous = tail; //предыдущий
+
+        while (current != null) {
+            Node<T> next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+        head = previous;
+        return true;
+    }
+
+    public void display() {
+        System.out.println("Node (first --> last): ");
+        Node<T> current = head;
+        while (current != null) {
+            current.displayNode();
+            current = current.next;
+        }
+        System.out.println("");
     }
 
     @Override
@@ -54,6 +83,10 @@ public class ForwardLinked<T> implements Iterable<T> {
         public Node(T value, Node<T> next) {
             this.value = value;
             this.next = next;
+        }
+
+        public void displayNode() {
+            System.out.println("{" + value + "}");
         }
     }
 }

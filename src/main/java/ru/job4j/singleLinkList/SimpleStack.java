@@ -7,11 +7,15 @@ public class SimpleStack<T> {
     private ForwardLinked<T> linked = new ForwardLinked<T>();
 
     public T pop() {
-        if (linked.isEmpty()) {
+        if (isEmpty()) {
             return (T) new NoSuchElementException();
         }
         T temp = linked.deleteFirst();
         return temp;
+    }
+
+    public boolean isEmpty() {
+        return linked.isEmpty();
     }
 
     public void push(T value) {
