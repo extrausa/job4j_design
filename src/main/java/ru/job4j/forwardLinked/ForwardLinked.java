@@ -31,15 +31,15 @@ public class ForwardLinked<T> implements Iterable<T> {
         if (isEmpty() || count == 1) {
             return false;
         }
-        Node<T> headFirst = head;
-        Node<T> tail = head.next;
-        Node<T> third = tail.next;
+//        Node<T> headFirst = head;
+//        Node<T> tail = head.next;
+//        Node<T> third = tail.next;
+//
+//        headFirst.next = null;
+//        tail.next = headFirst;
 
-        headFirst.next = null;
-        tail.next = headFirst;
-
-        Node<T> current = third; // текущий
-        Node<T> previous = tail; //предыдущий
+        Node<T> current = head; // текущий
+        Node<T> previous = null; //предыдущий
 
         while (current != null) {
             Node<T> next = current.next;
