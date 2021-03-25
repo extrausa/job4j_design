@@ -11,7 +11,7 @@ public class SimpleQueue<T> {
     public T poll() {
         T temp;
         //if (in.size() == 0) {
-        if (in.isEmpty()) {
+        if (in.isEmpty() && out.isEmpty()) {
             throw new NoSuchElementException();
         }
         if (out.size() > 0) {
