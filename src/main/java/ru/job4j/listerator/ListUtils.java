@@ -1,5 +1,5 @@
 package ru.job4j.listerator;
-
+//7. ListIterator [#455134]
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -34,57 +34,28 @@ public class ListUtils {
     public static <T> void removeIf(List<T> list, Predicate<T> filter) {
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
-            if (filter.test(list.get(i.nextIndex()))) {
-                i.next();
+            if (filter.test(i.next())) {
                 i.remove();
             }
-            if (!i.hasNext()) {
-                break;
-            }
-            i.next();
         }
-
     }
 
     public static <T> void replaceIf(List<T> list, Predicate<T> filter, T value) {
         ListIterator<T> i = list.listIterator();
         while (i.hasNext()) {
-            if (filter.test(list.get(i.nextIndex()))) {
-                i.next();
+            if (filter.test(i.next())) {
                 i.set(value);
             }
-            if (!i.hasNext()) {
-                break;
-            }
-            i.next();
         }
     }
 
     public static <T> void removeAll(List<T> list, List<T> elements) {
-        ListIterator<T> i = list.listIterator();
         ListIterator<T> b = elements.listIterator();
         while (b.hasNext()) {
-            if (!i.hasNext()) {
-                i = list.listIterator(list.size());
-                while (i.hasPrevious()) {
-                    i.previous();
-                }
+            T a = b.next();
+            if (list.contains(a)) {
+                list.remove(a);
             }
-            while (i.hasNext()) {
-                if (list.get(i.nextIndex()).equals(elements.get(b.nextIndex()))) {
-                    i.next();
-                    i.remove();
-                }
-                if (!i.hasNext()) {
-                    break;
-                }
-                i.next();
-
-            }
-            if (!b.hasNext()) {
-                break;
-            }
-            b.next();
         }
     }
 }
