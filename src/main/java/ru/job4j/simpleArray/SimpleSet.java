@@ -2,6 +2,7 @@ package ru.job4j.simpleArray;
 //1. Реализовать коллекцию Set на массиве [#455160]
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleSet<T> implements Set<T> {
 
@@ -19,14 +20,11 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public boolean contains(T value) {
-        if (set.count == 0) {
+        if (set.size() == 0) {
             return false;
         }
-        for (T a : set) {
-            if (null == null) {
-                return true;
-            }
-            if (a.equals(value)) {
+        while (set.iterator().hasNext()) {
+            if (Objects.equals(set.iterator().next(), value)) {
                 return true;
             }
         }
@@ -35,20 +33,6 @@ public class SimpleSet<T> implements Set<T> {
 
     @Override
     public Iterator<T> iterator() {
-        Iterator<T> it = new Iterator<T>() {
-            @Override
-            public boolean hasNext() {
-                return set.iterator().hasNext();
-            }
-
-            @Override
-            public T next() {
-                if (!hasNext()) {
-                    throw new NoSuchElementException();
-                }
-                return set.iterator().next();
-            }
-        };
-        return it;
+       return set.iterator();
     }
 }

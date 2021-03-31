@@ -9,7 +9,7 @@ import java.util.Objects;
 public class SimpleArray<T> implements Iterable<T> {
     private T[] elements;
     private int size;
-    public int count = 0;
+    private int count = 0;
 
 
     public SimpleArray(int size) {
@@ -25,6 +25,10 @@ public class SimpleArray<T> implements Iterable<T> {
         Objects.checkIndex(index, count);
         elements[index] = model;
 
+    }
+
+    public int size() {
+        return count;
     }
 
     public void remove(int index) {
