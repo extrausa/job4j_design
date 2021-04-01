@@ -23,8 +23,9 @@ public class SimpleSet<T> implements Set<T> {
         if (set.size() == 0) {
             return false;
         }
-        while (set.iterator().hasNext()) {
-            if (Objects.equals(set.iterator().next(), value)) {
+        Iterator<T> iterator = set.iterator();
+        while (iterator().hasNext()) {
+            if (Objects.equals(iterator().next(), value)) {
                 return true;
             }
         }

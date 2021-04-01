@@ -19,7 +19,7 @@ public class SimpleSetTest {
         Set<Integer> set = new SimpleSet<>();
         assertTrue(set.add(null));
         assertTrue(set.contains(null));
-        assertFalse(set.add(null));
+         assertFalse(set.add(null));
     }
 
 }
