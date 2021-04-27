@@ -23,16 +23,29 @@ public class DataItem<K, V> {
         this.value = value;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DataItem<?, ?> dataItem = (DataItem<?, ?>) o;
-        return Objects.equals(key, dataItem.key) && Objects.equals(value, dataItem.value);
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        if (!super.equals(object)) {
+            return false;
+        }
+        DataItem<?, ?> dataItem = (DataItem<?, ?>) object;
+        return java.util.Objects.equals(key, dataItem.key) && java.util.Objects.equals(value, dataItem.value);
+    }
+
+    public int hashCode() {
+        return java.util.Objects.hash(super.hashCode(), key, value);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(key, value);
+    public String toString() {
+        return "DataItem{" +
+                "key=" + key +
+                ", value=" + value +
+                '}';
     }
 }

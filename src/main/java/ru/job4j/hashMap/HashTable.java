@@ -1,16 +1,15 @@
 package ru.job4j.hashMap;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.NoSuchElementException;
+import java.util.*;
 
 public class HashTable<K, V> implements Iterator<V> {
     private int arraySize;
+    private int modCount = 0;
+    private int expectedModCount = 0;
     private int DEFAULT_CAPACITY = 16;
     private DataItem<K, V>[] hashArray;
+    int counterArray, valuesCounter;
     private int empty;
-    private int counterArray = 0;
-    private int valuesCounter = 0;
 
     public HashTable(int arraySize) {
         this.arraySize = arraySize;
@@ -24,85 +23,54 @@ public class HashTable<K, V> implements Iterator<V> {
         this.empty = arraySize;
     }
 
-    public void displayTable() {
-        System.out.println("Table: ");
-
-        for (int i = 0; i < arraySize; i++) {
-            if (hashArray[i] != null) {
-                System.out.println(hashArray[i].getKey() + " " + hashArray[i].getValue());
-            } else {
-                System.out.println("** ");
-            }
-        }
-        System.out.println("");
-
-    }
-
-    public int hashFunk(int key) {
-        return key % arraySize;
-    }
-
-    public void insert(DataItem item) {
-
-        int key = (int) item.getKey();
-        int hasVal1 = hashFunk(key);
-        while (hashArray[hasVal1] != null) {
-            ++hasVal1;
-            hasVal1 %= arraySize;
-        }
-        hashArray[hasVal1] = item;
-        empty--;
+    private int hashCode(int h, int length) {
+        return h & (length - 1);
     }
 
     public boolean insert(K key, V value) {
         arrayExtension();
-        for (int i = 0; i < arraySize; i++) {
-            if (hashArray[i] != null && key.equals(hashArray[i].getKey())) {
+        DataItem<K, V> temp = new DataItem<>(key, value);
+        int has = hashCode(key.hashCode(), arraySize);
+        if (hashArray[has] == null) {
+            hashArray[has] = temp;
+            modCount++;
+            return true;
+        } else {
+            if (hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
+                hashArray[has].setValue(value);
                 return false;
             }
-        }
-        int keyTemp = (int) key;
-        int hasVal1 = hashFunk(keyTemp);
-        while (hashArray[hasVal1] != null) {
-            ++hasVal1;
-            hasVal1 %= arraySize;
-        }
 
-        hashArray[hasVal1] = new DataItem<>(key, value);
-        empty--;
+        }
         return true;
+    }
+
+    public V get(K key) {
+        return hashArray[hashCode(key.hashCode(), arraySize)].getValue();
+    }
+
+    public boolean delete(K key) {
+        boolean res = true;
+        int has = hashCode(key.hashCode(), arraySize);
+        if (hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
+            hashArray[has] = null;
+            expectedModCount = modCount;
+            expectedModCount--;
+            return true;
+        }
+        return  false;
     }
 
     private void arrayExtension() {
         if (empty < arraySize / 2) {
             int newSize = arraySize * 2;
-            hashArray = Arrays.copyOf(hashArray, newSize);
-        }
-    }
-
-    public K get(K key) {
-        for (int i = 0; i < arraySize; i++) {
-            if (key.equals(hashArray[i].getKey())) {
-                return key;
+            DataItem<K, V>[] temp = new DataItem[newSize];
+            for (int i = 0; i < arraySize; i++) {
+                temp[i] = hashArray[i];
             }
+            hashArray = temp;
         }
-
-        return null;
     }
-
-    public boolean delete(K key) {
-        int hasVal = hashFunk((int) key);
-        while (hashArray[hasVal] != null) {
-            if (hashArray[hasVal].getKey() == key) {
-                hashArray[hasVal] = null;
-                return true;
-            }
-            ++hasVal;
-            hasVal %= arraySize;
-        }
-        return false;
-    }
-
 
     @Override
     public boolean hasNext() {
@@ -116,7 +84,7 @@ public class HashTable<K, V> implements Iterator<V> {
                 return false;
             }
         }
-
+        return true;
     }
 
     private boolean moveToNextCell() {
@@ -127,13 +95,18 @@ public class HashTable<K, V> implements Iterator<V> {
         return  counterArray < arraySize && hashArray[counterArray] != null;
     }
 
+    final void checkForComodification() {
+        if (modCount != expectedModCount)
+            throw new ConcurrentModificationException();
+    }
+
     @Override
     public V next() {
         if (!hasNext()) {
             throw new NoSuchElementException();
         }
+        checkForComodification();
         valuesCounter++;
         return hashArray[valuesCounter].getValue();
-
     }
 }
