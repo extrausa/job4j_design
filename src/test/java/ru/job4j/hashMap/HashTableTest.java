@@ -6,6 +6,7 @@ import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 import ru.job4j.iterator.BackwardArrayIt;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 import static org.hamcrest.Matchers.is;
@@ -26,6 +27,19 @@ public class HashTableTest {
     }
 
     @Test
+    public void whenFalse() {
+        HashTable<Integer, Integer> test = new HashTable<>();
+        test.insert(2, 2);
+        assertThat(test.insert(2, 4), is (true));
+    }
+    @Test
+    public void whenGetNotNull() {
+        HashTable<Integer, Integer> test = new HashTable<>();
+        test.insert(2, 4);
+        assertThat(test.get(2), is (4));
+    }
+
+    @Test
     public void whenDeleted() {
         HashTable<Integer, Integer> test = new HashTable<>();
         test.insert(2, 2);
@@ -42,13 +56,13 @@ public class HashTableTest {
         test.insert(2, 2);
         test.insert(3, 2);
         test.insert(4, 2);
-        assertThat(test.hasNext(), is (true));
+        assertThat(test.iterator().hasNext(), is (true));
     }
 
     @Test(expected = NoSuchElementException.class)
     public void whenNextFromEmpty() {
         HashTable<Integer, Integer> test = new HashTable<>();
-        test.next();
+        test.iterator().next();
     }
 
 }

@@ -2,7 +2,7 @@ package ru.job4j.hashMap;
 
 import java.util.*;
 
-public class HashTable<K, V> implements Iterator<V> {
+public class HashTable<K, V> implements Iterable<K> {
     private int arraySize;
     private int modCount = 0;
     private int expectedModCount = 0;
@@ -36,23 +36,28 @@ public class HashTable<K, V> implements Iterator<V> {
             modCount++;
             return true;
         } else {
-            if (hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
+            if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
                 hashArray[has].setValue(value);
-                return false;
+                return true;
             }
-
         }
-        return true;
+        return false;
     }
 
     public V get(K key) {
-        return hashArray[hashCode(key.hashCode(), arraySize)].getValue();
+        V temp;
+        int has = hashCode(key.hashCode(), arraySize);
+        if (hashArray[has].getKey().equals(key)) {
+            temp = hashArray[has].getValue();
+            return temp;
+        }
+        return null;
     }
 
     public boolean delete(K key) {
         boolean res = true;
         int has = hashCode(key.hashCode(), arraySize);
-        if (hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
+        if (hashArray[has].getKey().equals(key) && hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
             hashArray[has] = null;
             expectedModCount = modCount;
             expectedModCount--;
@@ -62,51 +67,62 @@ public class HashTable<K, V> implements Iterator<V> {
     }
 
     private void arrayExtension() {
+
         if (empty < arraySize / 2) {
+            int sizeTemp = arraySize;
             int newSize = arraySize * 2;
             DataItem<K, V>[] temp = new DataItem[newSize];
             for (int i = 0; i < arraySize; i++) {
-                temp[i] = hashArray[i];
+                temp[hashCode(hashArray[i].getKey().hashCode(), newSize)] = hashArray[i];
             }
             hashArray = temp;
+            arraySize = newSize;
         }
     }
 
     @Override
-    public boolean hasNext() {
-        if (valuesCounter == arraySize) {
-            return false;
-        }
-        if (hashArray[valuesCounter] == null) {
-            if (moveToNextCell()) {
+    public Iterator<K> iterator() {
+        Iterator<K> it = new Iterator<K>() {
+            @Override
+            public boolean hasNext() {
+                if (valuesCounter == arraySize) {
+                    return false;
+                }
+                if (hashArray[valuesCounter] == null) {
+                    if (moveToNextCell()) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                }
                 return true;
-            } else {
-                return false;
             }
-        }
-        return true;
+
+            private boolean moveToNextCell() {
+                counterArray++;
+                while (counterArray < arraySize && hashArray[counterArray] == null) {
+                    counterArray++;
+                }
+                return  counterArray < arraySize && hashArray[counterArray] != null;
+            }
+
+            final void checkForComodification() {
+                if (modCount != expectedModCount)
+                    throw new ConcurrentModificationException();
+            }
+
+            @Override
+            public K next() {
+                if (!hasNext()) {
+                    throw new NoSuchElementException();
+                }
+                checkForComodification();
+                valuesCounter++;
+                return hashArray[valuesCounter].getKey();
+            }
+        };
+        return it;
+
     }
 
-    private boolean moveToNextCell() {
-        counterArray++;
-        while (counterArray < arraySize && hashArray[counterArray] == null) {
-            counterArray++;
-        }
-        return  counterArray < arraySize && hashArray[counterArray] != null;
-    }
-
-    final void checkForComodification() {
-        if (modCount != expectedModCount)
-            throw new ConcurrentModificationException();
-    }
-
-    @Override
-    public V next() {
-        if (!hasNext()) {
-            throw new NoSuchElementException();
-        }
-        checkForComodification();
-        valuesCounter++;
-        return hashArray[valuesCounter].getValue();
-    }
 }
