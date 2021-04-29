@@ -49,6 +49,9 @@ public class HashTableTest {
         test.insert(4, "2");
         test.insert(5, "2");
         test.insert(6, "2");
+        Iterator<Integer> it = test.iterator();
+        System.out.println(it.next().toString());
+        System.out.println(it.next().toString());
         assertThat(test.delete(2), is (true));
     }
 

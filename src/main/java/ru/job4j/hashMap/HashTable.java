@@ -94,10 +94,10 @@ public class HashTable<K, V> implements Iterable<K> {
                     while (counterArray < arraySize && hashArray[counterArray] == null) {
                         counterArray++;
                     }
+                    valuesCounter = counterArray;
                     return  counterArray < arraySize && hashArray[counterArray] != null;
-                } else {
-                    return false;
                 }
+                return true;
             }
 
             @Override
