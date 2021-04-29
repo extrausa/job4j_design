@@ -53,6 +53,7 @@ public class HashTableTest {
         System.out.println(it.next().toString());
         System.out.println(it.next().toString());
         assertThat(test.delete(2), is (true));
+
     }
 
     @Test(expected = ConcurrentModificationException.class)

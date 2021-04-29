@@ -98,6 +98,7 @@ public class HashTable<K, V> implements Iterable<K> {
                     return  counterArray < arraySize && hashArray[counterArray] != null;
                 }
                 return true;
+
             }
 
             @Override
