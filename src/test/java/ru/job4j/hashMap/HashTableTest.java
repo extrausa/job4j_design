@@ -5,7 +5,9 @@ import static org.junit.Assert.assertThat;
 import static org.hamcrest.Matchers.is;
 import org.junit.Test;
 import ru.job4j.iterator.BackwardArrayIt;
+import ru.job4j.simpleArray.SimpleArrayNew;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -41,13 +43,22 @@ public class HashTableTest {
 
     @Test
     public void whenDeleted() {
-        HashTable<Integer, Integer> test = new HashTable<>();
-        test.insert(2, 2);
-        test.insert(3, 2);
-        test.insert(4, 2);
-        test.insert(5, 2);
-        test.insert(6, 2);
+        HashTable<Integer, String> test = new HashTable<>();
+        test.insert(2, "2");
+        test.insert(3, "2");
+        test.insert(4, "2");
+        test.insert(5, "2");
+        test.insert(6, "2");
         assertThat(test.delete(2), is (true));
+    }
+
+    @Test(expected = ConcurrentModificationException.class)
+    public void whenCorruptedIt() {
+        HashTable<Integer, String> test = new HashTable<>();
+        test.insert(1, "first");
+        Iterator<Integer> it = test.iterator();
+        test.insert(2, "second");
+        it.next();
     }
 
     @Test

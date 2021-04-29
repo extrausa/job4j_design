@@ -5,10 +5,8 @@ import java.util.*;
 public class HashTable<K, V> implements Iterable<K> {
     private int arraySize;
     private int modCount = 0;
-    private int expectedModCount = 0;
     private int DEFAULT_CAPACITY = 16;
     private DataItem<K, V>[] hashArray;
-    int counterArray, valuesCounter;
     private int empty;
 
     public HashTable(int arraySize) {
@@ -47,7 +45,7 @@ public class HashTable<K, V> implements Iterable<K> {
     public V get(K key) {
         V temp;
         int has = hashCode(key.hashCode(), arraySize);
-        if (hashArray[has].getKey().equals(key)) {
+        if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
             temp = hashArray[has].getValue();
             return temp;
         }
@@ -57,10 +55,9 @@ public class HashTable<K, V> implements Iterable<K> {
     public boolean delete(K key) {
         boolean res = true;
         int has = hashCode(key.hashCode(), arraySize);
-        if (hashArray[has].getKey().equals(key) && hashCode(hashArray[has].getKey().hashCode(), arraySize) == has) {
+        if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
             hashArray[has] = null;
-            expectedModCount = modCount;
-            expectedModCount--;
+            modCount++;
             return true;
         }
         return  false;
@@ -83,32 +80,24 @@ public class HashTable<K, V> implements Iterable<K> {
     @Override
     public Iterator<K> iterator() {
         Iterator<K> it = new Iterator<K>() {
+            private int expectedModCount = modCount;
+            int counterArray = 0;
+            int valuesCounter = 0;
+
             @Override
             public boolean hasNext() {
                 if (valuesCounter == arraySize) {
                     return false;
                 }
                 if (hashArray[valuesCounter] == null) {
-                    if (moveToNextCell()) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-            private boolean moveToNextCell() {
-                counterArray++;
-                while (counterArray < arraySize && hashArray[counterArray] == null) {
                     counterArray++;
+                    while (counterArray < arraySize && hashArray[counterArray] == null) {
+                        counterArray++;
+                    }
+                    return  counterArray < arraySize && hashArray[counterArray] != null;
+                } else {
+                    return false;
                 }
-                return  counterArray < arraySize && hashArray[counterArray] != null;
-            }
-
-            final void checkForComodification() {
-                if (modCount != expectedModCount)
-                    throw new ConcurrentModificationException();
             }
 
             @Override
@@ -116,9 +105,11 @@ public class HashTable<K, V> implements Iterable<K> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                checkForComodification();
-                valuesCounter++;
-                return hashArray[valuesCounter].getKey();
+                if (modCount != expectedModCount) {
+                    throw new ConcurrentModificationException();
+            }
+                //valuesCounter++;
+                return hashArray[valuesCounter++].getKey();
             }
         };
         return it;
