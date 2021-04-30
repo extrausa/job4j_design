@@ -56,6 +56,16 @@ public class HashTableTest {
 
     }
 
+    @Test
+    public void whenArrayFull() {
+        HashTable<Integer, String> test = new HashTable<>();
+        for (int i = 0; i < 14; i++) {
+            test.insert(i * 5 / 2 + 1, "Hello" + i);
+        }
+        assertThat(test.size(), is (32));
+
+    }
+
     @Test(expected = ConcurrentModificationException.class)
     public void whenCorruptedIt() {
         HashTable<Integer, String> test = new HashTable<>();

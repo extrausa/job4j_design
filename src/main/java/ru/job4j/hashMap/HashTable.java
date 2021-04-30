@@ -6,45 +6,50 @@ public class HashTable<K, V> implements Iterable<K> {
     private int arraySize;
     private int modCount = 0;
     private int DEFAULT_CAPACITY = 16;
+    private double LOAD_FACTOR = 0.75;
     private DataItem<K, V>[] hashArray;
-    private int empty;
+    private int count;
 
     public HashTable(int arraySize) {
         this.arraySize = arraySize;
         this.hashArray = new DataItem[arraySize];
-        this.empty = arraySize;
     }
 
     public HashTable() {
         this.hashArray = new DataItem[DEFAULT_CAPACITY];
         arraySize = DEFAULT_CAPACITY;
-        this.empty = arraySize;
     }
 
-    private int hashCode(int h, int length) {
+    private int inderFor(int h, int length) {
         return h & (length - 1);
     }
 
     public boolean insert(K key, V value) {
         arrayExtension();
         DataItem<K, V> temp = new DataItem<>(key, value);
-        int has = hashCode(key.hashCode(), arraySize);
+        int has = inderFor(key.hashCode(), arraySize);
         if (hashArray[has] == null) {
             hashArray[has] = temp;
+            count++;
             modCount++;
             return true;
         } else {
             if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
                 hashArray[has].setValue(value);
+                count++;
                 return true;
             }
         }
         return false;
     }
 
+    public int size() {
+        return arraySize;
+    }
+
     public V get(K key) {
         V temp;
-        int has = hashCode(key.hashCode(), arraySize);
+        int has = inderFor(key.hashCode(), arraySize);
         if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
             temp = hashArray[has].getValue();
             return temp;
@@ -54,10 +59,11 @@ public class HashTable<K, V> implements Iterable<K> {
 
     public boolean delete(K key) {
         boolean res = true;
-        int has = hashCode(key.hashCode(), arraySize);
+        int has = inderFor(key.hashCode(), arraySize);
         if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
             hashArray[has] = null;
             modCount++;
+            count--;
             return true;
         }
         return  false;
@@ -65,12 +71,16 @@ public class HashTable<K, V> implements Iterable<K> {
 
     private void arrayExtension() {
 
-        if (empty < arraySize / 2) {
+        if ((float) count / hashArray.length > LOAD_FACTOR) {
             int sizeTemp = arraySize;
             int newSize = arraySize * 2;
             DataItem<K, V>[] temp = new DataItem[newSize];
             for (int i = 0; i < arraySize; i++) {
-                temp[hashCode(hashArray[i].getKey().hashCode(), newSize)] = hashArray[i];
+                if (hashArray[i] != null) {
+                    temp[inderFor(hashArray[i].getKey().hashCode(), newSize)] = hashArray[i];
+                } else {
+                    continue;
+                }
             }
             hashArray = temp;
             arraySize = newSize;
