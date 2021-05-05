@@ -78,8 +78,6 @@ public class HashTable<K, V> implements Iterable<K> {
             for (int i = 0; i < arraySize; i++) {
                 if (hashArray[i] != null) {
                     temp[inderFor(hashArray[i].getKey().hashCode(), newSize)] = hashArray[i];
-                } else {
-                    continue;
                 }
             }
             hashArray = temp;
@@ -96,18 +94,25 @@ public class HashTable<K, V> implements Iterable<K> {
 
             @Override
             public boolean hasNext() {
-                if (valuesCounter == arraySize) {
-                    return false;
+//                if (valuesCounter == arraySize) {
+//                    return false;
+//                }
+//                if (hashArray[valuesCounter] == null) {
+//                    counterArray++;
+//                    while (counterArray < arraySize && hashArray[counterArray] == null) {
+//                        counterArray++;
+//                    }
+//                    valuesCounter = counterArray;
+//                    return  counterArray < arraySize && hashArray[counterArray] != null;
+//                }
+//                return true;
+                while (valuesCounter < hashArray.length && hashArray[valuesCounter] == null) {
+
+                    valuesCounter++;
+
                 }
-                if (hashArray[valuesCounter] == null) {
-                    counterArray++;
-                    while (counterArray < arraySize && hashArray[counterArray] == null) {
-                        counterArray++;
-                    }
-                    valuesCounter = counterArray;
-                    return  counterArray < arraySize && hashArray[counterArray] != null;
-                }
-                return true;
+
+                return valuesCounter < hashArray.length;
 
             }
 
