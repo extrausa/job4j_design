@@ -14,21 +14,34 @@ public class SimpleTree<E> implements Tree<E> {
         this.root = new Node<>(root);
     }
 
+    public boolean isBinary() {
+        Optional<Node<E>> rsl = Optional.empty(); //возвращает пустой экземпляр
+        Queue<Node<E>> data = new LinkedList<>(); // очередь на связном списке
+        int count = 0;
+        boolean result = false;
+        return result;
+    }
+
+    private Optional<Node> findByPredicate(Predicate<Node<E>> condition) {
+        Optional<Node> rsl = Optional.empty();
+        condition.test(root);
+        return rsl;
+
+    }
+
     @Override
     public boolean add(E parent, E child) {
         boolean rsl = false;
         Node<E> chTest = new Node<>(child);
         Node<E> pareTest  = new Node<>(parent);
-        if (findBy(parent).isPresent()) {
-            root.children.add(chTest);
-            rsl  = true;
+        if (findBy(parent).isPresent() && !findBy(child).isPresent()) {
+            findBy(parent).get().children.add(chTest);
+            rsl = true;
         } else {
-            root.children.add(pareTest);
-            if (findBy(parent).isPresent()) {
-                root.children.add(chTest);
-                rsl = true;
-            }
+            root.children.add(chTest);
+            rsl = true;
         }
+
         return rsl;
     }
 
@@ -47,4 +60,18 @@ public class SimpleTree<E> implements Tree<E> {
         }
         return rsl;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SimpleTree<?> that = (SimpleTree<?>) o;
+        return Objects.equals(root, that.root);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(root);
+    }
+
 }

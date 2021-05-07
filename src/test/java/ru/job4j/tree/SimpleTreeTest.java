@@ -13,7 +13,6 @@ public class SimpleTreeTest {
         tree.add(1, 4);
         tree.add(4, 5);
         tree.add(5, 6);
-        tree.add(7, 9);
         assertThat(
                 tree.findBy(6).isPresent(),
                 is(true)
