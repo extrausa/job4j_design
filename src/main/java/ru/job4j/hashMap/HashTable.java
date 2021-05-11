@@ -37,6 +37,7 @@ public class HashTable<K, V> implements Iterable<K> {
             if (hashArray[has] != null && hashArray[has].getKey().equals(key)) {
                 hashArray[has].setValue(value);
                 count++;
+                modCount++;
                 return true;
             }
         }
