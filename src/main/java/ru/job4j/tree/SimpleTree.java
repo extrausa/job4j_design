@@ -14,11 +14,20 @@ public class SimpleTree<E> implements Tree<E> {
         this.root = new Node<>(root);
     }
 
+    @Override
     public boolean isBinary() {
-        Optional<Node<E>> rsl = Optional.empty(); //возвращает пустой экземпляр
         Queue<Node<E>> data = new LinkedList<>(); // очередь на связном списке
-        int count = 0;
+        data.offer(this.root); //добавляем Node в очередь
         boolean result = false;
+        while (!data.isEmpty()) { // выполняется пока не пустая
+            Node<E> el = data.poll(); // резервная Noda со значением из головы очереди, удаляя его
+            if (el.children.size() > 2) { // если в резервной ноде значение равно значению передаваемом в методе
+                return result;
+            }
+            data.addAll(el.children); // в очередь возвращается значение и помещается в массив с сылкой на ребенока
+        }
+        result = true;
+
         return result;
     }
 
@@ -34,13 +43,9 @@ public class SimpleTree<E> implements Tree<E> {
         boolean rsl = false;
         Node<E> chTest = new Node<>(child);
         Node<E> pareTest  = new Node<>(parent);
-        if (findBy(parent).get().children.add(chTest) && !findBy(child).isPresent()) {
-            rsl = true;
-        } else {
-            root.children.add(chTest);
+        if (findBy(parent).get().children.add(chTest)) {
             rsl = true;
         }
-
         return rsl;
     }
 
