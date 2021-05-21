@@ -64,6 +64,7 @@ public class SimpleTree<E> implements Tree<E> {
 //        }
 //        return rsl;
 
+
         return findByPredicate(eNode -> eNode.value.equals(value));
     }
 
