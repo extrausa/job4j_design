@@ -63,8 +63,6 @@ public class SimpleTree<E> implements Tree<E> {
 //            data.addAll(el.children); // в очередь возвращается значение и помещается в массив с сылкой на ребенока
 //        }
 //        return rsl;
-
-
         return findByPredicate(eNode -> eNode.value.equals(value));
     }
 
