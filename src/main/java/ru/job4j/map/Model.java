@@ -6,13 +6,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Model {
-    private Map<User, Email> table = new HashMap<>();
+//    private final int MAX_VERTS = 20;
+//    Map<User, Email> graph;
+//    Boolean[] array
 
-    public boolean add(User user, Email email){
-        boolean rsl = false;
-        for (Email e : table.
-             ) {
 
-        }
-    }
 }
