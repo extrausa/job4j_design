@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 public class ForExample {
     public HashMap<Integer, String[]> clear(HashMap<Integer, String[]> maps) {
         HashMap<Integer, String[]> tempo = new HashMap<>();
+        int sizemaps = maps.size();
+        int sizetwo = maps.values().size();
+        int[][] matrix = new int[sizemaps][sizemaps];
         return tempo;
     }
 
