@@ -3,19 +3,19 @@ package ru.job4j.map;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Graph<K, V> {
+public class Graph{
     private final int MAX_VERTS = 20;
-    //private Vertex[] vertexList; //массив Вершин
-    private Map<K, V> vertexList;
+    private Vertex[] vertexList; //массив Вершин
+
 
     private int[][] adjMat; // матрица смежности
 
     private int nVerts; // текущее количество вершин
 
-    public Graph(HashMap<K, V> vertex) {
-        this.vertexList = vertex;
+    public Graph() {
+        this.vertexList = new Vertex[MAX_VERTS];
         // Матрица смежности
-        this.adjMat = new int[vertexList.size()][vertexList.size()];
+        this.adjMat = new int[MAX_VERTS][MAX_VERTS];
         this.nVerts = 0;
 
         for (int i = 0; i < MAX_VERTS; i++) {
