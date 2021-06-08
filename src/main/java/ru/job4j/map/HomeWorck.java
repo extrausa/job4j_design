@@ -12,7 +12,7 @@ public class HomeWorck {
         for (User user : source) {
             boolean isMainUser = true;  // Пока считаем, что пользователь основной
             for (String email : user.getEmails()) {
-                User prevUser = emails.putIfAbsent(email, user);
+                User prevUser = emails.putIfAbsent(email, user); // принимает значение непоредственно
                 // Уже есть пользователь с таким e-mail
                 if (prevUser != null) {
                     // достаем основного пользователя
@@ -32,6 +32,7 @@ public class HomeWorck {
         }
 
     }
+
     public static void main(String[] args) {
         HomeWorck email = new HomeWorck();
         List<User> source = Arrays.asList(
