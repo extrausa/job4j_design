@@ -1,9 +1,8 @@
 package ru.job4j.collectionstatistics;
 //2. Статистику по коллекции. [#45889]
 
-import java.util.*;
-
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
