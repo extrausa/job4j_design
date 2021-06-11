@@ -1,6 +1,12 @@
 package ru.job4j.collectionstatistics;
 //2. Статистику по коллекции. [#45889]
+
 import java.util.*;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+
 
 public class Analize {
     public Info diff(List<User> previous, List<User> current) {
@@ -40,7 +46,6 @@ public class Analize {
 //            List<User> toInsert = new ArrayList<User>();
 //            List<User> toUpdate = new ArrayList<User>();
 //            List<User> toDelete = new ArrayList<User>();
-
             HashMap<Integer, User> localUserMap = new HashMap<>();
             for (User user : current) {
                 localUserMap.put(user.getId(), user);
@@ -65,19 +70,8 @@ public class Analize {
 //            change.added = toInsert.size();
 //            change.changed = toUpdate.size();
 //            change.deleted = toDelete.size();
-            if (numbercount == 0 && sizePrev > sizeCurr) {
-                change.deleted = 1;
-            } else if (numbercount == 2 && sizePrev <= sizeCurr ||
-                    numbercount == 2 && sizePrev >= sizeCurr ||
-                    numbercount == 0 && sizePrev <= sizeCurr) {
-                change.added = 1;
-            }
         }
-
-
-
-
-        return change;
+       return change;
 
     }
 
