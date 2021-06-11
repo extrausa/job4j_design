@@ -55,9 +55,9 @@ public class AnalizeTest {
         ));
 
         Analize.Info create = start.diff(previous, current);
-        assertThat(create.added = 0, is (0));
-        assertThat(create.changed = 0, is (0));
-        assertThat(create.deleted = 0, is (0));
+        assertThat(create.added, is (0));
+        assertThat(create.changed, is (0));
+        assertThat(create.deleted, is (0));
     }
 
 

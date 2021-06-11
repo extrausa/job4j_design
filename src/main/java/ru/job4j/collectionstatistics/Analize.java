@@ -16,6 +16,7 @@ public class Analize {
         change.deleted = 0;
         int sizePrev = previous.size();
         int sizeCurr = current.size();
+        int countStep = 0;
         int numbercount = 0;
         if (check) {
             return change;
@@ -52,6 +53,11 @@ public class Analize {
 
             for (User user : previous) {
                 numbercount = 0;
+                countStep++;
+
+                if(localUserMap.size() == countStep - 1) {
+                    break;
+                }
                 if (localUserMap.get(user.getId()).getName().equals(user.getName())) {
                     //toUpdate.add(user);
                     numbercount++;
