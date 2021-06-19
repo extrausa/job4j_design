@@ -86,31 +86,4 @@ public class AnalizeTest {
         assertThat(create.deleted, is (0));
     }
 
-    @Test
-    public void whenEqualsIdAddNotEqualsNameAndSizeEqulasAndIdDeleted() {
-        Analize start = new Analize();
-        List<Analize.User> previous = new ArrayList<>(Arrays.asList(
-                new Analize.User(5, "Denis"),
-                new Analize.User(4, "SpyderMan"),
-                new Analize.User(10, "Ivan"),
-                new Analize.User(13, "Denis"),
-                new Analize.User(1, "Denis")
-
-        ));
-
-        List<Analize.User> current = new ArrayList<>(Arrays.asList(
-                new Analize.User(5, "Denis"),
-                new Analize.User(10, "Ivan"),
-                new Analize.User(10, "Ivan"),
-                new Analize.User(1, "Denis"),
-                new Analize.User(4, "Martin")
-        ));
-
-        Analize.Info create = start.diff(previous, current);
-        assertThat(create.added, is (1));
-        assertThat(create.changed, is (1));
-        assertThat(create.deleted, is (1));
-    }
-
-
 }

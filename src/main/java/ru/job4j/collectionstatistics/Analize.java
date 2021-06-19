@@ -16,18 +16,12 @@ public class Analize {
           for (User user : current) {
               localUserMap.put(user.getId(), user);
           }
-        if (localUserMap.size() < current.size()) {
-            countStep = current.size() - localUserMap.size();
-        }
-
-
          for (User user : previous) {
              if (localUserMap.get(user.getId()) == null) {
                  break;
              }
                 if (localUserMap.get(user.getId()).getName().equals(user.getName())) {
                     current.remove(user);
-
                 } else {
                     change.changed++;
                     change.added++;
@@ -36,7 +30,6 @@ public class Analize {
             }
             change.deleted = current.size() - sizeCurr - countStep;
        return change;
-
     }
 
     public static class User {
@@ -79,11 +72,8 @@ public class Analize {
     }
 
     public static class Info {
-
         int added;
         int changed;
-
         int deleted;
-
     }
 }
