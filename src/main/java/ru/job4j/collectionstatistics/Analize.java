@@ -3,7 +3,6 @@ package ru.job4j.collectionstatistics;
 
 import java.util.*;
 
-
 public class Analize {
     public Info diff(List<User> previous, List<User> current) {
         Info change = new Info();
