@@ -10,7 +10,6 @@ public class Analize {
         change.changed = 0;
         change.deleted = 0;
         int sizeCurr = 0;
-        int countStep = 0;
         HashMap<Integer, User> localUserMap = new HashMap<>();
           for (User user : current) {
               localUserMap.put(user.getId(), user);
@@ -27,7 +26,7 @@ public class Analize {
                     sizeCurr++;
                 }
             }
-            change.deleted = current.size() - sizeCurr - countStep;
+            change.deleted = current.size() - sizeCurr;
        return change;
     }
 
