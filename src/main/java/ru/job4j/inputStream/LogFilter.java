@@ -9,30 +9,25 @@ public class LogFilter {
     public static List<String> filter(String file) {
         List<String> temp = new ArrayList<>();
         String[] substr;
-        substr = file.split(" ");
-        for (int i = substr.length - 1; i >= substr.length - 5; i--) {
-            if (substr[i].contains("404")) {
-                temp.add(file);
-                return temp;
-            }
+        try (BufferedReader in = new BufferedReader(new FileReader(file))) {
+           for (String line = in.readLine(); line != null; line = in.readLine()) {
+                    substr = line.split(" ");
+               for (int i = substr.length - 1; i >= substr.length - 5; i--) {
+                   if (substr[i].contains("404")) {
+                       temp.add(line);
+                       break;
+                   }
+               }
+           }
+        } catch (Exception e) {
+                e.printStackTrace();
         }
         return temp;
     }
 
     public static void main (String[] args) {
-        List<String> log = new ArrayList<>();
-        try (BufferedReader in = new BufferedReader(new FileReader("log.txt"))) {
-                //in.lines().forEach(s -> filter(s));
-           for (String line = in.readLine(); line != null; line = in.readLine()) {
-                    if (filter(line).size() > 0) {
-                        log.add(line);
-                    }
-                }
-           log.stream().forEach(System.out::println);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            //System.out.println(log);
-        }
+        List<String> log = filter("log.txt");
+        log.stream().forEach(System.out::println);
+    }
 }
 
