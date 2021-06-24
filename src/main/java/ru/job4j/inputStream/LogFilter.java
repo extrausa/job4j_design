@@ -1,7 +1,7 @@
 package ru.job4j.inputStream;
 //0.3. BufferedReader. [#252489]
-import java.io.BufferedReader;
-import java.io.FileReader;
+//0.4. BufferedOutputStream [#252490]
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +25,34 @@ public class LogFilter {
         return temp;
     }
 
-    public static void main (String[] args) {
+    public static boolean save(List<String> log, String file) throws FileNotFoundException {
+        boolean point = false;
+        if (log.size() > 0) {
+            try (PrintWriter out = new PrintWriter(
+                    new BufferedOutputStream(//Первая обертка - это BufferedOutputStream. Это буфер, который собираем переданные в него байты
+                            new FileOutputStream(file) //Исходный поток ввода - это файл FileOutputStream.
+                    ))) {
+                log.stream().forEach(s -> out.printf("%s%n", s));
+                point = true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else  {
+            point = false;
+        }
+        return point;
+
+    }
+
+    public static void main (String[] args) throws FileNotFoundException {
         List<String> log = filter("log.txt");
-        log.stream().forEach(System.out::println);
+        if (save(log, "404.txt")) {
+            System.out.println("The data is recorded");
+            log.stream().forEach(System.out::println);
+        } else {
+            System.out.println("Data not found");
+        }
+
     }
 }
 
