@@ -11,18 +11,24 @@ public class Config {
     private final String path; //"./data/pair_without_comment.properties;
     private final Map<String, String> values = new HashMap<String, String>();
 
-
     public Config(final String path) {
         this.path = path;
     }
 
     public void load() {
         String[] substr;
+        char first;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 substr = line.split("=");
                 for (int i = 0; i < substr.length; i++) {
-                    if (substr.length >= 2) {
+                    first = substr[0].charAt(0);
+                    if (first == 23) {
+                        break;
+                    } else if (substr.length == 1) {
+                        throw new IllegalArgumentException("No value");
+                    }
+                    if (substr.length =) {
                         values.put(substr[0], substr[1]);
                     }
                 }
