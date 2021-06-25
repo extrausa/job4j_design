@@ -2,9 +2,7 @@ package ru.job4j.io;
 //1. Читаем файл конфигурации [#858]
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 public class Config {
 
@@ -17,19 +15,23 @@ public class Config {
 
     public void load() {
         String[] substr;
+        List<String> list = new ArrayList<>();
         char first;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
-                substr = line.split("=");
-                for (int i = 0; i < substr.length; i++) {
-                    first = substr[0].charAt(0);
-                    if (first == 23) {
+                list = Arrays.asList(line.split("="));
+                for (int i = 0; i < list.size(); i++) {
+                    if (line.trim().length() == 0) {
                         break;
-                    } else if (substr.length == 1) {
+                    }
+                    first = list.get(0).charAt(0);
+                    if (first == 35) {
+                        break;
+                    } else if (list.size() == 1) {
                         throw new IllegalArgumentException("No value");
                     }
-                    if (substr.length =) {
-                        values.put(substr[0], substr[1]);
+                    if (list.size() == 2) {
+                        values.put(list.get(0), list.get(1));
                     }
                 }
             }
