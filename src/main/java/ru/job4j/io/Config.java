@@ -16,15 +16,13 @@ public class Config {
 
     public void load() {
         List<String> list = new ArrayList<>();
-        char first;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 list = Arrays.asList(line.split("="));
                 if (line.trim().length() == 0) {
                     continue;
                 }
-                first = list.get(0).charAt(0);
-                if (first == 35) {
+                if (line.startsWith("#")) {
                     continue;
                 } else if (list.size() == 1) {
                     throw new IllegalArgumentException("No value");
