@@ -2,6 +2,9 @@ package ru.job4j.io;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import java.io.IOException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -23,12 +26,12 @@ public class ConfigTest {
         assertThat(config.value("hibernate.dialect"),is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 
-    @Test
-    public void whenKeyBroken () throws IllegalArgumentException {
+    @Test(expected = IllegalArgumentException.class)
+    public void whenKeyBroken () {
         String path = "./data/appError.properties";
         Config config = new Config(path);
         config.load();
-        Assert.fail(String.valueOf(new IllegalArgumentException("No value")));
+
     }
 
 }

@@ -2,6 +2,7 @@ package ru.job4j.io;
 //1. Читаем файл конфигурации [#858]
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class Config {
@@ -14,28 +15,24 @@ public class Config {
     }
 
     public void load() {
-        String[] substr;
         List<String> list = new ArrayList<>();
         char first;
         try (BufferedReader in = new BufferedReader(new FileReader(path))) {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 list = Arrays.asList(line.split("="));
-                for (int i = 0; i < list.size(); i++) {
-                    if (line.trim().length() == 0) {
-                        break;
-                    }
-                    first = list.get(0).charAt(0);
-                    if (first == 35) {
-                        break;
-                    } else if (list.size() == 1) {
-                        throw new IllegalArgumentException("No value");
-                    }
-                    if (list.size() == 2) {
-                        values.put(list.get(0), list.get(1));
-                    }
+                if (line.trim().length() == 0) {
+                    continue;
+                }
+                first = list.get(0).charAt(0);
+                if (first == 35) {
+                    continue;
+                } else if (list.size() == 1) {
+                    throw new IllegalArgumentException("No value");
+                } else {
+                    values.put(list.get(0), list.get(1));
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
