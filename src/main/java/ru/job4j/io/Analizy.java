@@ -9,7 +9,7 @@ import java.util.List;
 public class Analizy {
 
     @SuppressWarnings("checkstyle:WhitespaceAround")
-    public void unavailable(String source, String target) {
+    public static void unavailable(String source, String target) {
         List<String> separated = new ArrayList<>();
         List<String> queue = new LinkedList<>();
         int count = 0;
@@ -34,7 +34,7 @@ public class Analizy {
         }
     }
 
-    private void recording(List<String> queue, String target) {
+    private static void recording(List<String> queue, String target) {
         int count = 0;
         try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
             for (int i = 0; i < queue.size() - 2; i++) {
