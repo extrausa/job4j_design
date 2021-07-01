@@ -7,6 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Analizy {
+
     @SuppressWarnings("checkstyle:WhitespaceAround")
     public void unavailable(String source, String target) {
         List<String> separated = new ArrayList<>();
@@ -16,30 +17,31 @@ public class Analizy {
             for (String line = in.readLine(); line != null; line = in.readLine()) {
                 separated = Arrays.asList(line.split(" "));
                 if ((line.startsWith("400") || line.startsWith("500"))) {
-                    if (count == 1) {
-                        continue;
-                    } else {
+                    if (count == 0) {
                         queue.add(separated.get(1));
                         count++;
                     }
                 } else if (count > 0) {
                     queue.add(separated.get(1));
                     count = 0;
-                } else {
-                    continue;
                 }
             }
             if (queue.size() != 0) {
-                try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
-                    for (int i = 0; i < queue.size() - 1; i++) {
-                        out.println(queue.get(i) + " " + queue.get(i + 1));
-                        i++;
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                recording(queue, target);
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void recording(List<String> queue, String target) {
+        int count = 0;
+        try (PrintWriter out = new PrintWriter(new FileOutputStream(target))) {
+            for (int i = 0; i < queue.size() - 2; i++) {
+                out.println(queue.get(count) + " " + queue.get(++count));
+                count += 1;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
