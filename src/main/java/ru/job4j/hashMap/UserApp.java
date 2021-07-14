@@ -18,8 +18,6 @@ public class UserApp {
 
         userObjectMap.entrySet().forEach(
                 userObjectEntry -> System.out.println(userObjectEntry.getKey() + " " + userObjectEntry.getValue()));
-
-
     }
 }
 

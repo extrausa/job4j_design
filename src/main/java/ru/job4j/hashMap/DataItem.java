@@ -43,9 +43,6 @@ public class DataItem<K, V> {
 
     @Override
     public String toString() {
-        return "DataItem{" +
-                "key=" + key +
-                ", value=" + value +
-                '}';
+        return "DataItem{" + "key=" + key + ", value=" + value + '}';
     }
 }

@@ -11,13 +11,12 @@ public class SimpleArray<T> implements Iterable<T> {
     private int size;
     private int count = 0;
 
-
     public SimpleArray(int size) {
         this.size = size;
         elements = (T[]) new Object[size];
     }
 
-    public void add (T model) {
+    public void add(T model) {
         elements[count++] = model;
     }
 
@@ -41,6 +40,7 @@ public class SimpleArray<T> implements Iterable<T> {
         Objects.checkIndex(index, count);
         return elements[index];
     }
+
     @Override
     public Iterator<T> iterator() {
 
@@ -64,8 +64,12 @@ public class SimpleArray<T> implements Iterable<T> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SimpleArray<?> that = (SimpleArray<?>) o;
         return size == that.size && count == that.count && Arrays.equals(elements, that.elements);
     }
