@@ -1,9 +1,9 @@
 package ru.job4j.io;
 //4.1. Сканирование файловой системы. [#106929]
-import com.sun.tools.jconsole.JConsoleContext;
-
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.FileVisitResult;
+import java.nio.file.Path;
+import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     Predicate<Path> pred;
 
     public SearchFiles(Predicate<Path> condition) {
-        pred = condition;
+        this.pred = condition;
     }
 
     @Override

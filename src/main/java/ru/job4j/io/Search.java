@@ -1,7 +1,5 @@
 package ru.job4j.io;
 
-import ru.job4j.test.MyFileVisitor;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +9,8 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/");
+        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/");
         search(start, p -> p.toFile().getName().endsWith("js")).forEach(System.out::println);
-
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
@@ -21,5 +18,4 @@ public class Search {
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
     }
-
 }
