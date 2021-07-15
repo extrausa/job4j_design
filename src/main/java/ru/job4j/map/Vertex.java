@@ -17,8 +17,12 @@ public class Vertex { // он же user и e-mail
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Vertex vertex = (Vertex) o;
         return label == vertex.label && wasVisited == vertex.wasVisited && numberName == vertex.numberName && Objects.equals(name, vertex.name);
     }
@@ -27,6 +31,4 @@ public class Vertex { // он же user и e-mail
     public int hashCode() {
         return Objects.hash(label, wasVisited, name, numberName);
     }
-
-
 }

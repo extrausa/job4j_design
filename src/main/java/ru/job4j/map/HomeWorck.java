@@ -30,7 +30,6 @@ public class HomeWorck {
         for (User user: unique) {
             System.out.println(user.getName() + " " + user.getEmails());
         }
-
     }
 
     public static void main(String[] args) {
@@ -55,6 +54,4 @@ public class HomeWorck {
         );
         email.convert(source);
     }
-
-
 }

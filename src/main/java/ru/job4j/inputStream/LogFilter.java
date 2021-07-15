@@ -44,7 +44,7 @@ public class LogFilter {
 
     }
 
-    public static void main (String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         List<String> log = filter("log.txt");
         if (save(log, "404.txt")) {
             System.out.println("The data is recorded");

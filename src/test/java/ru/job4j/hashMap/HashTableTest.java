@@ -25,20 +25,21 @@ public class HashTableTest {
         test.insert(4, 2);
         test.insert(5, 2);
         test.insert(6, 2);
-        assertThat(test.get(2), is (2));
+        assertThat(test.get(2), is(2));
     }
 
     @Test
     public void whenFalse() {
         HashTable<Integer, Integer> test = new HashTable<>();
         test.insert(2, 2);
-        assertThat(test.insert(2, 4), is (true));
+        assertThat(test.insert(2, 4), is(true));
     }
+
     @Test
     public void whenGetNotNull() {
         HashTable<Integer, Integer> test = new HashTable<>();
         test.insert(2, 4);
-        assertThat(test.get(2), is (4));
+        assertThat(test.get(2), is(4));
     }
 
     @Test
@@ -52,7 +53,7 @@ public class HashTableTest {
         Iterator<Integer> it = test.iterator();
         System.out.println(it.next().toString());
         System.out.println(it.next().toString());
-        assertThat(test.delete(2), is (true));
+        assertThat(test.delete(2), is(true));
 
     }
 
@@ -62,7 +63,7 @@ public class HashTableTest {
         for (int i = 0; i < 14; i++) {
             test.insert(i * 5 / 2 + 1, "Hello" + i);
         }
-        assertThat(test.size(), is (32));
+        assertThat(test.size(), is(32));
 
     }
 
@@ -81,7 +82,7 @@ public class HashTableTest {
         test.insert(2, 2);
         test.insert(3, 2);
         test.insert(4, 2);
-        assertThat(test.iterator().hasNext(), is (true));
+        assertThat(test.iterator().hasNext(), is(true));
     }
 
     @Test(expected = NoSuchElementException.class)

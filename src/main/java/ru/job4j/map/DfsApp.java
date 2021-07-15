@@ -1,6 +1,6 @@
 package ru.job4j.map;
 
-public class DFSApp {
+public class DfsApp {
 
     public static void main(String[] args) {
         Graph theGrah = new Graph();

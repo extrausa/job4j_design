@@ -15,7 +15,7 @@ public class ConfigTest {
         String path = "./data/app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.dialect"),is("org.hibernate.dialect.PostgreSQLDialect"));
+        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 
     @Test
@@ -23,11 +23,11 @@ public class ConfigTest {
         String path = "./data/_app.properties";
         Config config = new Config(path);
         config.load();
-        assertThat(config.value("hibernate.dialect"),is("org.hibernate.dialect.PostgreSQLDialect"));
+        assertThat(config.value("hibernate.dialect"), is("org.hibernate.dialect.PostgreSQLDialect"));
     }
 
     @Test(expected = IllegalArgumentException.class)
-    public void whenKeyBroken () {
+    public void whenKeyBroken() {
         String path = "./data/appError.properties";
         Config config = new Config(path);
         config.load();

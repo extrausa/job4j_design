@@ -8,7 +8,7 @@ import java.nio.charset.StandardCharsets;
 public class ResultFile {
     public static void main(String[] args) throws IOException {
 
-        try (FileOutputStream fo = new FileOutputStream("result.txt")){
+        try (FileOutputStream fo = new FileOutputStream("result.txt")) {
             for (int i = 1; i < 10; i++) {
                 for (int j = 1; j < 10; j++) {
                     fo.write(Integer.toString(i * j).getBytes(StandardCharsets.UTF_8));

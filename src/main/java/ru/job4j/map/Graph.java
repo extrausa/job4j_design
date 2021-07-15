@@ -3,10 +3,9 @@ package ru.job4j.map;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Graph{
+public class Graph {
     private final int MAX_VERTS = 20;
     private Vertex[] vertexList; //массив Вершин
-
 
     private int[][] adjMat; // матрица смежности
 

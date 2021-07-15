@@ -34,7 +34,11 @@
         <module name="ConstantName"/>
         <!--<module name="LocalFinalVariableName"/>-->
         <module name="LocalVariableName"/>
-        <module name="MemberName"/>
+        <module name="MemberName">
+        <property name="format" value="^[A-Za-z0-9_.]+$"/>
+        <property name="applyToProtected" value="false"/>
+        <property name="applyToPackage" value="false"/>
+        </module>
         <module name="MethodName"/>
         <module name="PackageName">
             <property name="format" value="^[A-Za-z0-9_.]+$"/>

@@ -68,8 +68,12 @@ public class SimpleTree<E> implements Tree<E> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SimpleTree<?> that = (SimpleTree<?>) o;
         return Objects.equals(root, that.root);
     }

@@ -31,9 +31,9 @@ public class AnalizeTest {
         ));
 
         Analize.Info create = start.diff(previous, current);
-        assertThat(create.added, is (1));
-        assertThat(create.changed, is (1));
-        assertThat(create.deleted, is (0));
+        assertThat(create.added, is(1));
+        assertThat(create.changed, is(1));
+        assertThat(create.deleted, is(0));
     }
 
     @Test
@@ -55,9 +55,9 @@ public class AnalizeTest {
         ));
 
         Analize.Info create = start.diff(previous, current);
-        assertThat(create.added, is (0));
-        assertThat(create.changed, is (0));
-        assertThat(create.deleted, is (0));
+        assertThat(create.added, is(0));
+        assertThat(create.changed, is(0));
+        assertThat(create.deleted, is(0));
     }
 
     @Test
@@ -81,9 +81,9 @@ public class AnalizeTest {
         ));
 
         Analize.Info create = start.diff(previous, current);
-        assertThat(create.added, is (1));
-        assertThat(create.changed, is (1));
-        assertThat(create.deleted, is (0));
+        assertThat(create.added, is(1));
+        assertThat(create.changed, is(1));
+        assertThat(create.deleted, is(0));
     }
 
 }

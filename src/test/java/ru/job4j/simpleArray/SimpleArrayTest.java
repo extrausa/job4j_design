@@ -54,8 +54,6 @@ public class SimpleArrayTest {
         Iterator<Integer> iterator = first.iterator();
         assertTrue(iterator.hasNext());
         assertThat(first.get(2), is(7));
-
-
     }
 
 }
