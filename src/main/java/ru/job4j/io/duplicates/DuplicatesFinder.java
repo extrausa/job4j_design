@@ -9,6 +9,6 @@ public class DuplicatesFinder {
     public static void main(String[] args) throws IOException {
         DuplicatesVisitor temp = new DuplicatesVisitor();
         Files.walkFileTree(Path.of("./"), temp);
-        temp.getArrayList().stream().forEach(System.out::println);
+        temp.getArrayList().stream().forEach(fileProperty -> System.out.println(fileProperty.getName() + " " + fileProperty.getSize()));
     }
 }
