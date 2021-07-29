@@ -20,10 +20,10 @@ public class ArgsName {
             int a = args[i].length();
             String line = args[i];
             int iend = line.indexOf("=");
-            if (line.substring(++iend, line.length()).length() <= 0) {
+            if (line.substring(iend + 1, line.length()).length() <= 0) {
                 throw new IllegalArgumentException();
             }
-            values.put(line.substring(1, --iend), line.substring(++iend, line.length()));
+            values.put(line.substring(1, iend), line.substring(iend + 1, line.length()));
         }
     }
 
