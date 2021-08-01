@@ -58,26 +58,24 @@ public class Zip {
         String fileinput = null;
         String exclude = null;
         String fileNameZip = null;
-        String finalExclude = exclude;
         for (int i = 0; i < 3; i++) {
             in = new Scanner(System.in);
             if (i == 0) {
                 System.out.print("-d=");
-                fileinput = in.next();
+                fileinput = "-d=" + "" + in.next();
             } else if (i == 1) {
                 in = new Scanner(System.in);
                 System.out.print("-e=");
-                exclude = in.next();
+                exclude ="-e=" + "" + in.next();
             } else {
                 in = new Scanner(System.in);
                 System.out.print("-o=");
-                fileNameZip = in.next();
+                fileNameZip = "-o=" + "" + in.next();
             }
         }
-        ArgsName argsName = ArgsName.of(new String[]{"-d=" + "" + fileinput});
+        ArgsName argsName = ArgsName.of(new String[]{fileinput, exclude, fileNameZip});
         Path start =  Paths.get(argsName.get("d"));
-        Path path = Paths.get(fileNameZip);
-
-        packFiles(search(start, path1 -> !path1.toFile().getName().endsWith(finalExclude)), path);
+        Path path = Paths.get(argsName.get("o"));
+        packFiles(search(start, path1 -> !path1.toFile().getName().endsWith(argsName.get("e"))), path);
     }
 }
