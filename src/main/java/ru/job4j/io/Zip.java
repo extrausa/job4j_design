@@ -77,6 +77,7 @@ public class Zip {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
+
         ArgsName argsName = ArgsName.of(args);
         Path start =  Paths.get(argsName.get("d"));
         Path path = Paths.get(argsName.get("o"));
