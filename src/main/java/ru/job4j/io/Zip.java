@@ -74,7 +74,7 @@ public class Zip {
 //            }
 //        }
         //ArgsName argsName = ArgsName.of(new String[]{fileinput, exclude, fileNameZip});
-        if (args.length == 2) {
+        if (args.length != 2) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
         ArgsName argsName = ArgsName.of(args);
