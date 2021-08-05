@@ -2,9 +2,8 @@ package ru.job4j.io;
 //6. Кодировка. [#862]
 import java.io.*;
 import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 public class ConsoleChat {
     private final String path;
@@ -13,57 +12,91 @@ public class ConsoleChat {
     private static final String STOP = "стоп";
     private static final String CONTINUE = "продолжить";
     private List<String> dataTemp = new ArrayList<>();
+    boolean checkFlag = true;
+    List<String> words;
+    int count = 0;
 
-    public ConsoleChat(String path, String botAnswers) {
+    public ConsoleChat(String path, String botAnswers) throws IOException {
         this.path = path;
         this.botAnswers = botAnswers;
+        words = readFile(path, StandardCharsets.UTF_8 );
     }
 
-    public String run(String word) {
+    public String run(String word) throws IOException {
         String answer = word;
-
-        if (answer.equals(OUT)) {
+        if (count == words.size()) {
+            count = 0;
+        }
+        if (word.equals(CONTINUE)) {
+            checkFlag = true;
+            dataTemp.add(word);
+            answer = words.get(count);
+            dataTemp.add(answer);
+            count++;
+            return answer;
+        }
+        if (word.equals(OUT)) {
             dataTemp.add(OUT);
             writeDataInFile(botAnswers, dataTemp);
-        } else if (answer.equals(STOP)) {
+            return OUT;
+        } else if (word.equals(STOP)) {
+            checkFlag = false;
             dataTemp.add(STOP);
-        } else {
+            return word;
+        } else if (checkFlag) {
             dataTemp.add(word);
-            String answerWord = readFile(path);
-            dataTemp.add(answerWord);
-            return answerWord;
+            answer = words.get(count);
+            dataTemp.add(answer);
+            count++;
+            return answer;
         }
-        return null;
+        dataTemp.add(word);
+        return STOP;
     }
 
-    public String readFile(String path) {
-        StringBuilder builder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
-            br.lines().forEach(builder::append);
-        } catch (IOException e) {
+    public List<String> readFile(String path, Charset cs) throws IOException {
+        TreeSet<String> uniqueSortedWords = new TreeSet<String>();
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), cs))) {
+           String line = null;
+           while ((line = br.readLine()) != null) {
+               String[] words = line.split(" ");
+               for (String a : words) {
+                   uniqueSortedWords.add(a);
+               }
+           }
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        return builder.toString();
+        List<String> list = new ArrayList<String>(uniqueSortedWords);
+        return list;
     }
 
     public void writeDataInFile(String path, List<String> data) {
-        try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("WINDOWS-1251"), true))) {
+        try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
             data.forEach(pw::println);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void main(String[] args) {
-        String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt";
-        String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";
+    public static void main(String[] args) throws IOException {
+        //String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt"; // B
+        String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt"; // A
+        //String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";//B
+        String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt";//A
         ConsoleChat cc = new ConsoleChat(path, botAnswers);
-        Scanner in;
-        String fileinput = null;
-        for (int i = 0; i < 3; i++) {
+        boolean fileinput = true;
+        while (fileinput) {
+            Scanner in = new Scanner(System.in);
             System.out.println("Введите слово");
-            in = new Scanner(System.in);
-            cc.run(in.next());
+            String word = cc.run(in.next());
+            if (word.equals("стоп")) {
+                continue;
+            } else if (word.equals("закончить")) {
+                fileinput = false;
+            } else {
+                System.out.println(word);
+            }
         }
     }
 }
