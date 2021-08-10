@@ -14,27 +14,20 @@ import java.util.Scanner;
 public class CSVReader {
     public List<String> list = new ArrayList<>();
     public List<String> reader(Path path, Charset cs) throws FileNotFoundException {
-        int name = 0;
-        int age = 1;
+        String nameUser = "name";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
             String line = null;
             while ((line = br.readLine()) != null) {
                 Scanner words = new Scanner(new ByteArrayInputStream(line.getBytes(StandardCharsets.UTF_8))).useDelimiter(", ");
-
                 for (Scanner it = words; it.hasNext(); ) {
                     String a = it.next();
 
-                    list.add(a);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
-    }
-
-    private List<String> filter(List<String> separated) {
-        separated.stream().filter()
     }
 
     public static void main(String[] args) throws FileNotFoundException {
