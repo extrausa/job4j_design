@@ -6,27 +6,34 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class CSVReader {
     public List<String> list = new ArrayList<>();
-    public List<String> reader(Path path, Charset cs) throws FileNotFoundException {
+    public Map<String, Integer> map = new HashMap<>();
+
+    public List<String> reader(Path path, Charset cs, String[] filter) throws FileNotFoundException {
         String nameUser = "name";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
-            String line = null;
-            while ((line = br.readLine()) != null) {
-                Scanner words = new Scanner(new ByteArrayInputStream(line.getBytes(StandardCharsets.UTF_8))).useDelimiter(", ");
-                for (Scanner it = words; it.hasNext(); ) {
-                    String a = it.next();
-
-                }
-            }
+            br.lines().forEach(s -> list.add(s));
         } catch (Exception e) {
             e.printStackTrace();
         }
+        for (int i = 0; i < list.size(); i++) {
+            int count = 0;
+            if (count == 0) {
+                Scanner words = new Scanner(new ByteArrayInputStream(list.get(i).getBytes(StandardCharsets.UTF_8))).useDelimiter(", ");
+                for (Scanner it = words; it.hasNext(); ) {
+                    String a = it.next();
+                    map.put(a,count++);
+                }
+                count = 0;
+            }
+        }
+        for (int i = 0; i < filter.length; i++) {
+            map
+        }
+
         return list;
     }
 
