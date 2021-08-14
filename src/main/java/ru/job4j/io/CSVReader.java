@@ -10,12 +10,13 @@ import java.util.*;
 
 public class CSVReader {
     public List<String> list = new ArrayList<>();
-    public List<Integer> modificator = new ArrayList<>();
+    public List<String> modificator = new ArrayList<>();
     public List<String> data = new ArrayList<>();
+    public List<String> result = new ArrayList<>();
     int count = 0;
+    int step = 0;
 
     public List<String> reader(Path path, Charset cs, String[] filter) throws FileNotFoundException {
-        String nameUser = "name";
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
             br.lines().forEach(s -> list.add(s));
         } catch (Exception e) {
@@ -27,14 +28,34 @@ public class CSVReader {
             for (Scanner it = words; it.hasNext();) {
                 String a = it.next();
                 if (count == 0) {
-                    modificator.add(count);
+                    modificator.add(a);
                 }
                 data.add(a);
             }
             count++;
         }
-        for (int i = 0; i < data.size(); i++) {
-            
+        int point = 0;
+        int countPoint = 0;
+        while (filter.length > step) {
+            int countModificator = 0;
+            for (int i = 0; i < modificator.size(); i++) {
+                if (modificator.get(i).equals(filter[0])) {
+                    point = i;
+                    break;
+                }
+            }
+            for (int i = 0; i < data.size(); i++) {
+                if (countPoint == point) {
+                   result.add(data.get(i));
+                   countPoint++;
+                   continue;
+                }
+                if (i > countPoint) {
+                    countPoint = 0;
+                }
+                countPoint++;
+            }
+            step++;
         }
         return list;
     }
