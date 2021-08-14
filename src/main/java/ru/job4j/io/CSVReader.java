@@ -23,7 +23,6 @@ public class CSVReader {
             e.printStackTrace();
         }
         for (int i = 0; i < list.size(); i++) {
-
             Scanner words = new Scanner(new ByteArrayInputStream(list.get(i).getBytes(StandardCharsets.UTF_8))).useDelimiter(", ");
             for (Scanner it = words; it.hasNext();) {
                 String a = it.next();
@@ -36,33 +35,35 @@ public class CSVReader {
         }
         int point = 0;
         int countPoint = 0;
+        int countModificator = 0;
         while (filter.length > step) {
-            int countModificator = 0;
+
             for (int i = 0; i < modificator.size(); i++) {
-                if (modificator.get(i).equals(filter[0])) {
+                if (modificator.get(i).equals(filter[countModificator])) {
                     point = i;
                     break;
                 }
             }
             for (int i = 0; i < data.size(); i++) {
-                if (countPoint == point) {
-                   result.add(data.get(i));
-                   countPoint++;
-                   continue;
-                }
-                if (i > countPoint) {
+                if (countPoint >= modificator.size()) {
                     countPoint = 0;
                 }
+                if (countPoint == point) {
+                   result.add(data.get(i));
+                   //continue;
+                }
+
                 countPoint++;
             }
             step++;
+            countModificator++;
         }
-        return list;
+        return result;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
-        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
+        Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
+        //Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
         CSVReader reader = new CSVReader();
         String[] name = new String[]{"name", "age"};
         for (String s : reader.reader(start, StandardCharsets.UTF_8, name)) {
