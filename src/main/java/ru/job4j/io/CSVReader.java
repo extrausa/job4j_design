@@ -10,7 +10,9 @@ import java.util.*;
 
 public class CSVReader {
     public List<String> list = new ArrayList<>();
-    public Map<Integer, String> map = new HashMap<>();
+    public List<Integer> modificator = new ArrayList<>();
+    public List<String> data = new ArrayList<>();
+    int count = 0;
 
     public List<String> reader(Path path, Charset cs, String[] filter) throws FileNotFoundException {
         String nameUser = "name";
@@ -20,28 +22,19 @@ public class CSVReader {
             e.printStackTrace();
         }
         for (int i = 0; i < list.size(); i++) {
-            int count = 0;
+
             Scanner words = new Scanner(new ByteArrayInputStream(list.get(i).getBytes(StandardCharsets.UTF_8))).useDelimiter(", ");
             for (Scanner it = words; it.hasNext();) {
                 String a = it.next();
-                map.put(count++, a);
-            }
-        }
-        List<String> templist = new ArrayList<>();
-        int countWhile = 0;
-        while (filter.length > countWhile) {
-            String namePoint = filter[countWhile];
-            int keyTemp = 0;
-            for (Integer key : map.keySet()) {
-                if (map.get(key).toString().equals(namePoint)) {
-                    keyTemp = key;
-                    break;
+                if (count == 0) {
+                    modificator.add(count);
                 }
+                data.add(a);
             }
-            for (int i = 0; i < map.size(); i++) {
-
-            }
-            countWhile++;
+            count++;
+        }
+        for (int i = 0; i < data.size(); i++) {
+            
         }
         return list;
     }
