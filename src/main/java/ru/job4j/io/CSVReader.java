@@ -15,6 +15,9 @@ public class CSVReader {
     public List<String> result = new ArrayList<>();
     int count = 0;
     int step = 0;
+    int point = 0;
+    int countPoint = 0;
+    int countModificator = 0;
 
     public List<String> reader(Path path, Charset cs, String[] filter) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
@@ -33,11 +36,7 @@ public class CSVReader {
             }
             count++;
         }
-        int point = 0;
-        int countPoint = 0;
-        int countModificator = 0;
         while (filter.length > step) {
-
             for (int i = 0; i < modificator.size(); i++) {
                 if (modificator.get(i).equals(filter[countModificator])) {
                     point = i;
@@ -50,7 +49,6 @@ public class CSVReader {
                 }
                 if (countPoint == point) {
                    result.add(data.get(i));
-                   //continue;
                 }
 
                 countPoint++;
