@@ -63,7 +63,8 @@ public class CSVReader {
         int stepModificator = 0;
         int stepFilter = 0;
         for (int i = 0; i < modificator.size(); i++) {
-            
+
+
         }
         for (int i = 0; i < data.size(); i++) {
             
