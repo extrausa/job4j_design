@@ -20,7 +20,7 @@ public class ConsoleChat {
     public ConsoleChat(String path, String botAnswers) throws IOException {
         this.path = path;
         this.botAnswers = botAnswers;
-        words = readFile(path, StandardCharsets.UTF_8 );
+        words = readFile(path, StandardCharsets.UTF_8);
     }
 
     public String run(String word) throws IOException {
@@ -60,7 +60,7 @@ public class ConsoleChat {
             return STOP;
         }
 
-        public List<String> readFile (String path, Charset cs) throws IOException {
+        public List<String> readFile(String path, Charset cs) throws IOException {
             TreeSet<String> uniqueSortedWords = new TreeSet<String>();
             try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path), cs))) {
                 String line = null;
@@ -77,7 +77,7 @@ public class ConsoleChat {
             return list;
         }
 
-        public void writeDataInFile (String path, List < String > data) {
+        public void writeDataInFile(String path, List<String> data) {
             try (PrintWriter pw = new PrintWriter(new FileWriter(path, Charset.forName("UTF-8"), true))) {
                 data.forEach(pw::println);
             } catch (IOException e) {
@@ -85,7 +85,7 @@ public class ConsoleChat {
             }
         }
 
-        public static void main (String[]args) throws IOException {
+        public static void main(String[]args) throws IOException {
             //String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt"; // B
             String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt"; // A
             //String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";//B
@@ -101,11 +101,8 @@ public class ConsoleChat {
                     break;
                 }
                 System.out.println(words);
-
             }
-
         }
-
 }
 
 
