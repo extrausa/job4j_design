@@ -16,14 +16,14 @@ public class CSVReader {
 
     public List<String> reader(Path path, Charset cs, String[] filter) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
-            try (var scanner = new Scanner(br).useDelimiter(", |\\n")) {
+            try (var scanner = new Scanner(br).useDelimiter(",|\\n")) {
                 while (scanner.hasNext()) {
                     if (count == 0) {
                         String name2 = scanner.nextLine();
                         Scanner newWord = new Scanner(name2).useDelimiter(",|\\r\\n");
                         while (newWord.hasNext()) {
                             String nameTitle = newWord.next();
-                            modificator.add(nameTitle);
+                            modificator.add(nameTitle.trim());
                             }
                     }
                     String name = scanner.next();
@@ -58,24 +58,42 @@ public class CSVReader {
         return filter(data, modificator, filter);
     }
 
-    private List<String> filter(List<String> data, List<String> modificator, String[] filter) {
+    private List<String> filter(List<String> data, List<String> mod, String[] filter) {
         List<String> result = new ArrayList<>();
         int stepModificator = 0;
         int stepFilter = 0;
-        for (int i = 0; i < modificator.size(); i++) {
+        int index = 0;
+        for (int i = 0; i < mod.size(); i++) {
 
+            for (int j = 0; j < filter.length; j++) {
+                if (mod.get(i).equals(filter[j])) {
+                    index = i;
+                }
+
+            }
+            for (int j = 0; j < data.size(); j++) {
+                if (stepModificator >= mod.size()) {
+                    stepModificator = 0;
+                }
+                if (stepModificator == index) {
+                    result.add(data.get(j));
+                    stepModificator++;
+                    continue;
+                }
+                stepModificator++;
+            }
+            if (stepFilter >= filter.length) {
+                break;
+            }
+            stepFilter++;
 
         }
-        for (int i = 0; i < data.size(); i++) {
-            
-
-        }
-        return data;
+        return result;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
-        //Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
+        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
+        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
         CSVReader reader = new CSVReader();
         String[] name = new String[]{"name", "age"};
         for (String s : reader.reader(start, StandardCharsets.UTF_8, name)) {
