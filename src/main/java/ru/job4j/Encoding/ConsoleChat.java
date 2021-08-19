@@ -19,10 +19,7 @@ public class ConsoleChat {
 
     public void run() {
         List<String> answer = List.of("привет", "пока");
-
-
         writeDataInFile(path, answer);
-
     }
 
     public String readFile(String path) {

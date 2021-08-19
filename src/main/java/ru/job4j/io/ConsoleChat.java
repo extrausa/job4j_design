@@ -89,7 +89,7 @@ public class ConsoleChat {
             //String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt"; // B
             String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt"; // A
             //String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";//B
-            String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt";//A
+            String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt"; //A
             ConsoleChat cc = new ConsoleChat(path, botAnswers);
             System.out.println("Введите слово");
             Scanner in = new Scanner(System.in);
