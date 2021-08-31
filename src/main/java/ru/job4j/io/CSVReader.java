@@ -11,50 +11,36 @@ import java.util.*;
 public class CSVReader {
     //public List<String> list = new ArrayList<>();
     public List<String> modificator = new ArrayList<>();
-    public List<String> data = new ArrayList<>();
+   // public List<String> data = new ArrayList<>();
     int count = 0;
 
     public List<String> reader(Path path, Charset cs, String[] filter, String delimetr) throws FileNotFoundException {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
-            try (var scanner = new Scanner(br).useDelimiter(delimetr + "|\\n")) {
+            try (var scanner = new Scanner(br).useDelimiter(delimetr + System.lineSeparator())) {
                 while (scanner.hasNext()) {
                     if (count == 0) {
                         String name2 = scanner.nextLine();
-                        Scanner newWord = new Scanner(name2).useDelimiter(delimetr + "|\\r\\n");
-                        while (newWord.hasNext()) {
-                            String nameTitle = newWord.next();
-                            modificator.add(nameTitle.trim());
-                            }
+                        parsIndex(name2, delimetr);
+//                        Scanner newWord = new Scanner(name2).useDelimiter(delimetr);
+//                        while (newWord.hasNext()) {
+//                            String nameTitle = newWord.next();
+//                            //modificator.add(nameTitle.trim());
+//                            }
                     }
                     String name = scanner.next();
-                    data.add(name);
+                    //data.add(name);
                     count++;
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        while (filter.length > step) {
-//            for (int i = 0; i < modificator.size(); i++) {
-//                if (modificator.get(i).equals(filter[countModificator])) {
-//                    point = i;
-//                    break;
-//                }
-//            }
-//            for (int i = 0; i < data.size(); i++) {
-//                if (countPoint >= modificator.size()) {
-//                    countPoint = 0;
-//                }
-//                if (countPoint == point) {
-//                   result.add(data.get(i));
-//                }
-//
-//                countPoint++;
-//            }
-//            step++;
-//            countModificator++;
-//        }
-        return filter(data, modificator, filter);
+        return null; //filter(data, modificator, filter);
+    }
+    private List<String> parsIndex(String nameLine, String delimetr) {
+        List<String> result = new ArrayList<>();
+  //      result.add(name.trim());
+        return result;
     }
 
     private List<String> filter(List<String> data, List<String> mod, String[] filter) {
