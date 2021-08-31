@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class CSVReader {
-    //public List<String> list = new ArrayList<>();
+    public List<String> list = new ArrayList<>();
     public List<String> modificator = new ArrayList<>();
-   // public List<String> data = new ArrayList<>();
+    public List<Integer> dataIndex = new ArrayList<>();
     int count = 0;
 
     public List<String> reader(Path path, Charset cs, String[] filter, String delimetr) throws FileNotFoundException {
@@ -20,64 +20,66 @@ public class CSVReader {
                 while (scanner.hasNext()) {
                     if (count == 0) {
                         String name2 = scanner.nextLine();
-                        parsIndex(name2, delimetr);
-//                        Scanner newWord = new Scanner(name2).useDelimiter(delimetr);
-//                        while (newWord.hasNext()) {
-//                            String nameTitle = newWord.next();
-//                            //modificator.add(nameTitle.trim());
-//                            }
+                        parsIndex(name2, delimetr, filter);
                     }
+
                     String name = scanner.next();
-                    //data.add(name);
                     count++;
+                    return filter(name, dataIndex, delimetr);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null; //filter(data, modificator, filter);
-    }
-    private List<String> parsIndex(String nameLine, String delimetr) {
-        List<String> result = new ArrayList<>();
-  //      result.add(name.trim());
-        return result;
+        return null;
     }
 
-    private List<String> filter(List<String> data, List<String> mod, String[] filter) {
-        List<String> result = new ArrayList<>();
-        int stepModificator = 0;
-        int stepFilter = 0;
-        int index = 0;
-        int count = 0;
-        for (int i = 0; i < mod.size(); i++) {
-            for (int j = 0; j < filter.length; j++) {
-                if (mod.get(i).equals(filter[j])) {
-                    index = i;
-                }
-            }
-            for (int j = 0; j < data.size(); j++) {
+    private List<Integer> parsIndex(String nameLine, String delimetr, String[] filter) {
+        int countIndex = 0;
+        Scanner newWord = new Scanner(nameLine).useDelimiter(delimetr);
+        while (newWord.hasNext()) {
+            String nameTitle = newWord.next();
+            modificator.add(nameTitle.trim());
+        }
+        for (int i = 0; i < filter.length; i++) {
+            for (int j = 0; j < modificator.size(); j++) {
 
-                if (stepModificator >= mod.size()) {
-                    stepModificator = 0;
+                if (filter[i].equals(modificator.get(j))) {
+                    dataIndex.add(countIndex);
+                    //countIndex++;
+                    break;
                 }
-                if (stepModificator == index) {
-                    result.add(data.get(j));
-                    stepModificator++;
-                    continue;
-                }
-                stepModificator++;
-            }
-            stepFilter++;
-            if (stepFilter >= filter.length) {
-                break;
+                countIndex++;
             }
         }
-        return result;
+        return dataIndex;
+    }
+
+    private List<String> filter(String line, List<Integer> mod, String delimetr) {
+        int counting = 0;
+        Scanner newWord = new Scanner(line).useDelimiter(delimetr);
+        while (newWord.hasNext()) {
+            String nameTitle = newWord.next();
+
+            if (mod.size() > counting) {
+                if (counting == mod.get(counting)) {
+                    counting++;
+                    list.add(nameTitle);
+                    continue;
+                }
+            }
+            if (counting >= modificator.size() - 1) {
+                counting = 0;
+                continue;
+            }
+            counting++;
+        }
+        return list;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
-        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
+        Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
+        //Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
         CSVReader reader = new CSVReader();
 //        if (args.length != 2) {
 //            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");

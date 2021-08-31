@@ -19,6 +19,7 @@ public class EchoServer {
                 try (OutputStream out = socket.getOutputStream();
                      BufferedReader in = new BufferedReader(
                              new InputStreamReader(socket.getInputStream()))) {
+
                     //В ответ мы записываем строчку.
                     out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     //В программе читается весь входной поток.
