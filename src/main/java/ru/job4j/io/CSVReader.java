@@ -9,29 +9,28 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class CSVReader {
+    private Map<String, List<String>> mapArray = new HashMap<>();
     public List<String> list = new ArrayList<>();
     public List<String> modificator = new ArrayList<>();
     public List<Integer> dataIndex = new ArrayList<>();
     int count = 0;
 
-    public List<String> reader(Path path, Charset cs, String[] filter, String delimetr) throws FileNotFoundException {
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs))) {
-            try (var scanner = new Scanner(br).useDelimiter(delimetr + System.lineSeparator())) {
+    public Map<String, List<String>> reader(Path path, Charset cs, String[] filter, String delimetr) throws FileNotFoundException {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile()), cs));
+             var scanner = new Scanner(br).useDelimiter(delimetr + System.lineSeparator())) {
                 while (scanner.hasNext()) {
                     if (count == 0) {
                         String name2 = scanner.nextLine();
                         parsIndex(name2, delimetr, filter);
                     }
-
-                    String name = scanner.next();
+                    String name = scanner.nextLine();
                     count++;
-                    return filter(name, dataIndex, delimetr);
-                }
+                    filter(name, dataIndex, delimetr);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return mapArray;
     }
 
     private List<Integer> parsIndex(String nameLine, String delimetr, String[] filter) {
@@ -43,10 +42,8 @@ public class CSVReader {
         }
         for (int i = 0; i < filter.length; i++) {
             for (int j = 0; j < modificator.size(); j++) {
-
                 if (filter[i].equals(modificator.get(j))) {
                     dataIndex.add(countIndex);
-                    //countIndex++;
                     break;
                 }
                 countIndex++;
@@ -59,12 +56,13 @@ public class CSVReader {
         int counting = 0;
         Scanner newWord = new Scanner(line).useDelimiter(delimetr);
         while (newWord.hasNext()) {
+            list.clear();
             String nameTitle = newWord.next();
 
             if (mod.size() > counting) {
                 if (counting == mod.get(counting)) {
+                    mapConvert(nameTitle, counting);
                     counting++;
-                    list.add(nameTitle);
                     continue;
                 }
             }
@@ -75,6 +73,21 @@ public class CSVReader {
             counting++;
         }
         return list;
+    }
+
+    private Map<String, List<String>> mapConvert(String nameTitle, int count) {
+        List<String> list = new ArrayList<>();
+        list.add(nameTitle);
+        if (mapArray.isEmpty()) {
+            mapArray.put(modificator.get(count), list);
+        } else {
+            if (mapArray.containsKey(modificator.get(count))) {
+                mapArray.get(modificator.get(count)).add(nameTitle);
+            } else {
+                mapArray.put(modificator.get(count), list);
+            }
+        }
+        return mapArray;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -88,8 +101,8 @@ public class CSVReader {
         //Path start = Paths.get(argsName.get("path"));
         String output = ", "; //argsName.get("out");
         String[] name = new String[]{"name", "age"}; //argsName.get("filter").split(",");
-        for (String s : reader.reader(start, StandardCharsets.UTF_8, name, output)) {
-            System.out.println(s);
+        for (List<String> s : reader.reader(start, StandardCharsets.UTF_8, name, output).values()) {
+            s.stream().forEach(s1 -> System.out.println(s1));
         }
     }
 }
