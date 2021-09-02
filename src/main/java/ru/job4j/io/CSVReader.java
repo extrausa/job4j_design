@@ -91,16 +91,16 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
+        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
         //Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
         CSVReader reader = new CSVReader();
-//        if (args.length != 2) {
-//            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
-//        }
-        //ArgsName argsName = ArgsName.of(args);
-        //Path start = Paths.get(argsName.get("path"));
-        String output = ", "; //argsName.get("out");
-        String[] name = new String[]{"name", "age"}; //argsName.get("filter").split(",");
+        if (args.length != 4) {
+            throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
+        }
+        ArgsName argsName = ArgsName.of(args);
+        Path start = Paths.get(argsName.get("path"));
+        String output = argsName.get("out");
+        String[] name = argsName.get("filter").split(",");
         for (List<String> s : reader.reader(start, StandardCharsets.UTF_8, name, output).values()) {
             s.stream().forEach(s1 -> System.out.println(s1));
         }
