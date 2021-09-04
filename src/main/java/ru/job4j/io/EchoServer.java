@@ -16,10 +16,12 @@ public class EchoServer {
                     String[] wordArray = word.split(" ");
                     for (String answerWord : wordArray) {
                         if (answerWord.endsWith("Hello")) {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("Hello".getBytes());
                         } else if (answerWord.endsWith("Exit")) {
                             server.close();
                         } else if (answerWord.endsWith("Any")) {
+                            out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                             out.write("What".getBytes());
                         }
                     }
