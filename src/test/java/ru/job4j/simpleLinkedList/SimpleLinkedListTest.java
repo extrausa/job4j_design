@@ -30,8 +30,9 @@ public class SimpleLinkedListTest {
         array.addLast("second");
         //array.addFirst("throw");
         array.addLast("4th");
-        String rsl = array.iterator().next();
-        assertThat(rsl, is("first"));
+        Iterator<String> it = array.iterator();
+        it.next();
+        assertThat(it.next(), is("first"));
     }
 
     @Test(expected = ConcurrentModificationException.class)
