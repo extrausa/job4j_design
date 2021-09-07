@@ -1,13 +1,11 @@
 package ru.job4j.io;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-//0. Что такое Socket? [#4850]00
-//1. Бот [#7921]
-//4. Slf4j - вывод exception. [#268853]00
+
 public class EchoServer {
 
     private static final Logger LOG = LoggerFactory.getLogger(UsageLog4j.class.getName());
@@ -32,8 +30,6 @@ public class EchoServer {
                             out.write("What".getBytes());
                         }
                     }
-                    //out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
-                    //out.write("Hello, dear friend.".getBytes());
                     for (String str = in.readLine(); str != null && !str.isEmpty(); str = in.readLine()) {
                         System.out.println(str);
                     }

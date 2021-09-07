@@ -15,21 +15,22 @@ public class SimpleStack<T> {
     }
 
     public boolean isEmpty() {
+
         return linked.isEmpty();
     }
 
     public void push(T value) {
+
         linked.addFirst(value);
     }
 
-//    public void pushEnd(T value) {
-//        linked.addLast(value);
-//    }
     public int size() {
+
         return linked.size();
     }
 
     public void display() {
+
         linked.dispalyNode();
     }
 }
