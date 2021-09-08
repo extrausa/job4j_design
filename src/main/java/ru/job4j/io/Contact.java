@@ -31,13 +31,12 @@ public class Contact implements Serializable {
 
     public static void main(String[] args) throws IOException {
         final Contact contact = new Contact(123456, "+7 (111) 111-11-11");
-        File tempFile = Files.createTempFile(null, null).toFile();
-        try (FileOutputStream fos = new FileOutputStream(tempFile);
+        try (FileOutputStream fos = new FileOutputStream("/home/denis/IdeaProjects/job4j_design/test/contact.json");
              ObjectOutputStream oos =
                      new ObjectOutputStream(fos)) {
             oos.writeObject(contact);
         }
-        try (FileInputStream fis = new FileInputStream(tempFile);
+        try (FileInputStream fis = new FileInputStream("/home/denis/IdeaProjects/job4j_design/test/contact.json");
              ObjectInputStream ois =
                      new ObjectInputStream(fis)) {
             final Contact contactFromFile = (Contact) ois.readObject();
