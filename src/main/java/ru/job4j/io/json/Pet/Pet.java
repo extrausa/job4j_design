@@ -19,12 +19,6 @@ public class Pet {
 
     @Override
     public String toString() {
-        return "Pet{" +
-                "puppy=" + puppy +
-                ", age=" + age +
-                ", nickname='" + nickname + '\'' +
-                ", ownerCard=" + ownerCard +
-                ", parents=" + Arrays.toString(parents) +
-                '}';
+        return "Pet{" + "puppy=" + puppy + ", age=" + age + ", nickname='" + nickname + '\'' + ", ownerCard=" + ownerCard + ", parents=" + Arrays.toString(parents) + '}';
     }
 }

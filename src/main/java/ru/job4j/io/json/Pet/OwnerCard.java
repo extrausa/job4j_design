@@ -11,9 +11,6 @@ public class OwnerCard {
 
     @Override
     public String toString() {
-        return "OwnerCard{" +
-                "name='" + name + '\'' +
-                ", phone=" + phone +
-                '}';
+        return "OwnerCard{" +  "name='" + name + '\'' + ", phone=" + phone + '}';
     }
 }
