@@ -1,0 +1,8 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+<pet puppy="false" age="13" nickname="Cash">
+    <ownerCard name="Bob" phone="125-129"/>
+    <parents>
+            <parent>Chip</parent>
+            <parent>Married</parent>
+    </parents>
+</pet>
