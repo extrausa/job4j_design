@@ -12,19 +12,19 @@ public class InOutJSON {
         final Gson gson = new GsonBuilder().create();
         System.out.println(gson.toJson(pet));
 
-        final String petJson =
-                "{"
-                    + "\"puppy\":false,"
-                    + "\"age\":13,"
-                    + "\"nickname\":\"Cash\","
-                    + "\"ownerCard\":"
-                    + "{"
-                            + "\"name\":\"Bob\","
-                            + "\"phone\":\"125-129\""
-                    + "},"
-                    + "\"parents\":"
-                        + "[\"Chip\",\"Dalesha\"]"
-                + "}";
+        final String petJson = gson.toJson(pet);
+//                "{"
+//                    + "\"puppy\":false,"
+//                    + "\"age\":13,"
+//                    + "\"nickname\":\"Cash\","
+//                    + "\"ownerCard\":"
+//                    + "{"
+//                            + "\"name\":\"Bob\","
+//                            + "\"phone\":\"125-129\""
+//                    + "},"
+//                    + "\"parents\":"
+//                        + "[\"Chip\",\"Dalesha\"]"
+//                + "}";
         final Pet petMod = gson.fromJson(petJson, Pet.class);
         System.out.println(petMod);
     }
