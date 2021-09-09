@@ -19,6 +19,6 @@ public class UsageLog4j {
         float six = 22.1F;
         double seven = 22.1;
         boolean eight = true;
-        LOG.debug("Type : {} byte, {} short, {} int, {} char, {} long, {} float, {} double , {} boolean", one, two, three, four, five, six, seven,eight);
+        LOG.debug("Type : {} byte, {} short, {} int, {} char, {} long, {} float, {} double , {} boolean", one, two, three, four, five, six, seven, eight);
     }
 }
