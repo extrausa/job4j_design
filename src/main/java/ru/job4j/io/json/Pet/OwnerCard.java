@@ -1,8 +1,19 @@
 package ru.job4j.io.json.Pet;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "ownerCard")
 public class OwnerCard {
-    private final String name;
-    private final String phone;
+
+    @XmlAttribute
+    private  String name;
+
+    @XmlAttribute
+    private  String phone;
+
+    public OwnerCard() {
+    }
 
     public OwnerCard(String name, String phone) {
         this.name = name;

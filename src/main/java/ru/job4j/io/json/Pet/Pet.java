@@ -1,13 +1,28 @@
 package ru.job4j.io.json.Pet;
 
+import javax.xml.bind.annotation.*;
 import java.util.Arrays;
 
+@XmlRootElement(name = "pet")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Pet {
-    private final boolean puppy;
-    private final int age;
-    private final String nickname;
-    private final OwnerCard ownerCard;
-    private final String[] parents;
+
+    @XmlAttribute
+    private  boolean puppy;
+
+    @XmlAttribute
+    private  int age;
+
+    @XmlAttribute
+    private  String nickname;
+    private  OwnerCard ownerCard;
+
+    @XmlElementWrapper(name = "parents")
+    @XmlElement(name = "parent")
+    private  String[] parents;
+
+    public Pet() {
+    }
 
     public Pet(boolean puppy, int age, String nickname, OwnerCard ownerCard, String... parents) {
         this.puppy = puppy;
