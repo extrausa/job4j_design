@@ -37,7 +37,7 @@ public class EchoServer {
                 }
             }
         } catch (IOException e) {
-            LOG.error("Exception in ServerSocket", e);
+            LOG.error("Exception in ServerSocket ", e);
         }
     }
 }
