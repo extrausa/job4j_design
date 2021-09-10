@@ -1,9 +1,5 @@
 package ru.job4j.io.json.Pet;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import ru.job4j.io.json.Person;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;

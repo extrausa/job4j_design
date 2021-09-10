@@ -2,8 +2,6 @@ package ru.job4j.io.json.Pet;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import ru.job4j.io.json.Contact;
-import ru.job4j.io.json.Person;
 
 import java.util.ArrayList;
 import java.util.List;
