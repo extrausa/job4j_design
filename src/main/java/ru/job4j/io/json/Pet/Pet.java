@@ -32,6 +32,46 @@ public class Pet {
         this.parents = parents;
     }
 
+    public void setPuppy(boolean puppy) {
+        this.puppy = puppy;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public void setOwnerCard(OwnerCard ownerCard) {
+        this.ownerCard = ownerCard;
+    }
+
+    public void setParents(String[] parents) {
+        this.parents = parents;
+    }
+
+    public boolean isPuppy() {
+        return puppy;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public OwnerCard getOwnerCard() {
+        return ownerCard;
+    }
+
+    public String[] getParents() {
+        return parents;
+    }
+
     @Override
     public String toString() {
         return "Pet{" + "puppy=" + puppy + ", age=" + age + ", nickname='" + nickname + '\'' + ", ownerCard=" + ownerCard + ", parents=" + Arrays.toString(parents) + '}';
