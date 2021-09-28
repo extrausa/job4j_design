@@ -19,11 +19,7 @@ public class SearchFile {
         String fullNameMatchFile = (argsName.get("n"));
         String nameFile = (argsName.get("o"));
         String typeFound = (argsName.get("t"));
-//        Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
-//        String fullNameMatchFile = (".*.js");
-//        String nameFile = ("log.txt");
-//        String typeFound = ("regex");
-        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
+        File path = new File("./test", nameFile);
 
         if (!path.exists()) {
             try {
@@ -44,8 +40,9 @@ public class SearchFile {
                 e.printStackTrace();
             }
         } else if (typeFound.equals("mask")) {
+            String[] nameDot = fullNameMatchFile.split("\\.(?=[^\\.]+$)");
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().endsWith(fullNameMatchFile));
+                List<Path> list = search(file, path1 -> path1.toFile().getName().endsWith(nameDot[1]));
                 if (!list.isEmpty()) {
                     for (Path p : list) {
                         searchFile.writeFile(path, p.toFile());
