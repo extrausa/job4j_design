@@ -207,7 +207,7 @@
               <finalName>searchFile</finalName>
               <transformers>
                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                  <mainClass>ru.job4j.fileSearch.Search</mainClass>
+                  <mainClass>ru.job4j.fileSearch.SearchFile</mainClass>
                 </transformer>
               </transformers>
             </configuration>
