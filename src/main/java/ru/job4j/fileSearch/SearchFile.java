@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import static ru.job4j.io.Search.search;
 
@@ -23,7 +24,7 @@ public class SearchFile {
 //        String typeFound = (argsName.get("t"));
 //        File path = new File("./test", nameFile);
         Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
-        String fullNameMatchFile = (".*.js");
+        String fullNameMatchFile = ("*some?file.doc?");
         String nameFile = ("log.txt");
         String typeFound = ("regex");
         File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
@@ -49,7 +50,8 @@ public class SearchFile {
             }
         } else if (typeFound.equals("regex")) {
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().matches(fullNameMatchFile));
+                Pattern pat = Pattern.compile(fullNameMatchFile);
+                List<Path> list = search(file, path1 -> path1.toFile().getName().matches(pat.pattern()));
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -72,18 +74,13 @@ public class SearchFile {
                 e.printStackTrace();
             }
         }
-        Writer writer = null;
-        try {
-            writer = new FileWriter(directoryLog);
+        try (PrintWriter out = new PrintWriter(new FileWriter(directoryLog, true))) {
             for (Path p : list) {
-                writer.write(p.toString());
-                writer.write(System.lineSeparator());
+                out.write(p.toString());
+                out.write(System.lineSeparator());
             }
-            writer.flush();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
