@@ -4,8 +4,10 @@ package ru.job4j.fileSearch;
 import ru.job4j.io.ArgsName;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import static ru.job4j.io.Search.search;
@@ -13,29 +15,27 @@ import static ru.job4j.io.Search.search;
 public class SearchFile {
     public static void main(String[] args) {
         SearchFile searchFile = new SearchFile();
-        searchFile.validation(args);
-        ArgsName argsName = ArgsName.of(args);
-        Path file = Paths.get(argsName.get("d"));
-        String fullNameMatchFile = (argsName.get("n"));
-        String nameFile = (argsName.get("o"));
-        String typeFound = (argsName.get("t"));
-        File path = new File("./test", nameFile);
+//        searchFile.validation(args);
+//        ArgsName argsName = ArgsName.of(args);
+//        Path file = Paths.get(argsName.get("d"));
+//        String fullNameMatchFile = (argsName.get("n"));
+//        String nameFile = (argsName.get("o"));
+//        String typeFound = (argsName.get("t"));
+//        File path = new File("./test", nameFile);
+        Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
+        String fullNameMatchFile = (".*.js");
+        String nameFile = ("log.txt");
+        String typeFound = ("regex");
+        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
+        searchFile.choice(typeFound, file, path, fullNameMatchFile, searchFile);
 
-        if (!path.exists()) {
-            try {
-                path.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+    }
+
+    private void choice(String typeFound, Path file, File path, String fullNameMatchFile, SearchFile searchFile) {
         if (typeFound.equals("name")) {
             try {
-                 List<Path> list = search(file, path1 -> path1.toFile().getName().equals(fullNameMatchFile));
-                if (!list.isEmpty()) {
-                    for (Path p : list) {
-                        searchFile.writeFile(path, p.toFile());
-                    }
-                }
+                List<Path> list = search(file, path1 -> path1.toFile().getName().equals(fullNameMatchFile));
+                searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -43,26 +43,19 @@ public class SearchFile {
             String[] nameDot = fullNameMatchFile.split("\\.(?=[^\\.]+$)");
             try {
                 List<Path> list = search(file, path1 -> path1.toFile().getName().endsWith(nameDot[1]));
-                if (!list.isEmpty()) {
-                    for (Path p : list) {
-                        searchFile.writeFile(path, p.toFile());
-                    }
-                }
+                searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (typeFound.equals("regex")) {
             try {
                 List<Path> list = search(file, path1 -> path1.toFile().getName().matches(fullNameMatchFile));
-                if (!list.isEmpty()) {
-                    for (Path p : list) {
-                        searchFile.writeFile(path, p.toFile());
-                    }
-                }
+                searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
+
     }
 
     private void validation(String[] args) {
@@ -71,12 +64,26 @@ public class SearchFile {
         }
     }
 
-    private void writeFile(File directoryLog, File subfile) {
-        byte[] bufAbsolutAdress = (subfile.getAbsolutePath() + System.lineSeparator()).getBytes(StandardCharsets.UTF_8);
-        try (FileOutputStream file = new FileOutputStream(directoryLog, true)) {
-                file.write(bufAbsolutAdress);
-        } catch (IOException e) {
+    private void writeFile(File directoryLog, List<Path> list) {
+        if (!directoryLog.exists()) {
+            try {
+                directoryLog.createNewFile();
+            } catch (IOException e) {
                 e.printStackTrace();
+            }
         }
+        Writer writer = null;
+        try {
+            writer = new FileWriter(directoryLog);
+            for (Path p : list) {
+                writer.write(p.toString());
+                writer.write(System.lineSeparator());
+            }
+            writer.flush();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
