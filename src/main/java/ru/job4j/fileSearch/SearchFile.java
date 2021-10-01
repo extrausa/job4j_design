@@ -41,17 +41,17 @@ public class SearchFile {
                 e.printStackTrace();
             }
         } else if (typeFound.equals("mask")) {
-            String[] nameDot = fullNameMatchFile.split("\\.(?=[^\\.]+$)");
+            Pattern pat = Pattern.compile(fullNameMatchFile);
+            //String[] nameDot = fullNameMatchFile.split("\\.(?=[^\\.]+$)");
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().endsWith(nameDot[1]));
+                List<Path> list = search(file, path1 -> path1.toFile().getName().);
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (typeFound.equals("regex")) {
             try {
-                Pattern pat = Pattern.compile(fullNameMatchFile);
-                List<Path> list = search(file, path1 -> path1.toFile().getName().matches(pat.pattern()));
+                List<Path> list = search(file, path1 -> path1.toFile().getName().matches(fullNameMatchFile));
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();

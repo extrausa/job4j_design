@@ -40,46 +40,46 @@ public class Zip {
     }
 
     public static void main(String[] args) throws IOException {
-//        packSingleFile(
-//                new File("/home/extrausa/IdeaProjects/job4j_design/test/pom.xml"),
-//                new File("/home/extrausa/IdeaProjects/job4j_design/test/pom.zip")
-//        );
+        packSingleFile(
+                new File("/home/extrausa/IdeaProjects/job4j_design/test/pom.xml"),
+                new File("/home/extrausa/IdeaProjects/job4j_design/test/pom.zip")
+        );
         //String fileoutput =  "/home/denis/IdeaProjects/job4j_design/test/test.zip";
-        //String fileoutput = "/home/extrausa/IdeaProjects/job4j_design/test/test.zip";
-        //String fileinput = "/home/extrausa/IdeaProjects/job4j_design/";
+        String fileoutput = "/home/extrausa/IdeaProjects/job4j_design/test/test.zip";
+        String fileinput = "/home/extrausa/IdeaProjects/job4j_design/";
         //String fileinput = "/home/denis/IdeaProjects/job4j_design";
-        //Path start = Paths.get(fileinput);
-        //Path path = Paths.get(fileoutput);
-        //File file = new File(fileoutput);
-//        List<Path> sources = new ArrayList<>();
-//        search(start, path1 -> path1.toFile().getName().endsWith(".js"));
-//        sources.add(start);
-//        Scanner in;
-//        String fileinput = null;
-//        String exclude = null;
-//        String fileNameZip = null;
-//        for (int i = 0; i < 3; i++) {
-//            in = new Scanner(System.in);
-//            if (i == 0) {
-//                System.out.print("-d=");
-//                fileinput = "-d=" + "" + in.next();
-//            } else if (i == 1) {
-//                in = new Scanner(System.in);
-//                System.out.print("-e=");
-//                exclude ="-e=" + "" + in.next();
-//            } else {
-//                in = new Scanner(System.in);
-//                System.out.print("-o=");
-//                fileNameZip = "-o=" + "" + in.next();
-//            }
-//        }
-        //ArgsName argsName = ArgsName.of(new String[]{fileinput, exclude, fileNameZip});
+        Path start = Paths.get(fileinput);
+        Path path = Paths.get(fileoutput);
+        File file = new File(fileoutput);
+        List<Path> sources = new ArrayList<>();
+        search(start, path1 -> path1.toFile().getName().endsWith(".js"));
+        sources.add(start);
+        Scanner in;
+        //String fileinput = null;
+        String exclude = null;
+        String fileNameZip = null;
+        for (int i = 0; i < 3; i++) {
+            in = new Scanner(System.in);
+            if (i == 0) {
+                System.out.print("-d=");
+                fileinput = "-d=" + "" + in.next();
+            } else if (i == 1) {
+                in = new Scanner(System.in);
+                System.out.print("-e=");
+                exclude = "-e=" + "" + in.next();
+            } else {
+                in = new Scanner(System.in);
+                System.out.print("-o=");
+                fileNameZip = "-o=" + "" + in.next();
+            }
+        }
+        ArgsName argsName = ArgsName.of(new String[]{fileinput, exclude, fileNameZip});
         if (args.length != 2) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");
         }
-        ArgsName argsName = ArgsName.of(args);
-        Path start =  Paths.get(argsName.get("d"));
-        Path path = Paths.get(argsName.get("o"));
+        //ArgsName argsName = ArgsName.of(args);
+        //Path start =  Paths.get(argsName.get("d"));
+        //Path path = Paths.get(argsName.get("o"));
         packFiles(search(start, path1 -> !path1.toFile().getName().endsWith(argsName.get("e"))), path);
     }
 }
