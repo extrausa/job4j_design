@@ -3,11 +3,8 @@ package ru.job4j.fileSearch;
 
 import ru.job4j.io.ArgsName;
 import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -16,18 +13,18 @@ import static ru.job4j.io.Search.search;
 public class SearchFile {
     public static void main(String[] args) {
         SearchFile searchFile = new SearchFile();
-//        searchFile.validation(args);
-//        ArgsName argsName = ArgsName.of(args);
-//        Path file = Paths.get(argsName.get("d"));
-//        String fullNameMatchFile = (argsName.get("n"));
-//        String nameFile = (argsName.get("o"));
-//        String typeFound = (argsName.get("t"));
-//        File path = new File("./test", nameFile);
-        Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
-        String fullNameMatchFile = ("*some?file.doc?");
-        String nameFile = ("log.txt");
-        String typeFound = ("regex");
-        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
+        searchFile.validation(args);
+        ArgsName argsName = ArgsName.of(args);
+        Path file = Paths.get(argsName.get("d"));
+        String fullNameMatchFile = (argsName.get("n"));
+        String nameFile = (argsName.get("o"));
+        String typeFound = (argsName.get("t"));
+        File path = new File("./test", nameFile);
+//        Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
+//        String fullNameMatchFile = ("some?file.doc?");
+//        String nameFile = ("log.txt");
+//        String typeFound = ("mask");
+//        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
         searchFile.choice(typeFound, file, path, fullNameMatchFile, searchFile);
 
     }
@@ -42,16 +39,16 @@ public class SearchFile {
             }
         } else if (typeFound.equals("mask")) {
             Pattern pat = Pattern.compile(fullNameMatchFile);
-            //String[] nameDot = fullNameMatchFile.split("\\.(?=[^\\.]+$)");
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().);
+                List<Path> list = search(file, path1 -> path1.toFile().getName().equals(pat.pattern()));
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if (typeFound.equals("regex")) {
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().matches(fullNameMatchFile));
+                Pattern pat = Pattern.compile(fullNameMatchFile);
+                List<Path> list = search(file, path1 -> path1.toFile().getName().equals(pat.matcher(path1.toFile().getName())));
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
