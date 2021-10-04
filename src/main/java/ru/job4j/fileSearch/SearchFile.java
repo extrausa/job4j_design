@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.regex.Pattern;
-
 import static ru.job4j.io.Search.search;
 
 public class SearchFile {
@@ -26,29 +25,31 @@ public class SearchFile {
 //        String typeFound = ("mask");
 //        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
         searchFile.choice(typeFound, file, path, fullNameMatchFile, searchFile);
-
     }
 
     private void choice(String typeFound, Path file, File path, String fullNameMatchFile, SearchFile searchFile) {
         if (typeFound.equals("name")) {
+            searchFilePre(file, path, fullNameMatchFile, null, searchFile);
+        } else if (typeFound.equals("mask")) {
+            Pattern pat = Pattern.compile(fullNameMatchFile.replace("*", ".*").replace("?", "\\w{1}"));
+            searchFilePre(file, path, fullNameMatchFile, pat, searchFile);
+        } else if (typeFound.equals("regex")) {
+            Pattern pat = Pattern.compile(fullNameMatchFile);
+            searchFilePre(file, path, fullNameMatchFile, pat, searchFile);
+        }
+    }
+
+    private void searchFilePre(Path file, File path, String fullNameMatchFile, Pattern pat, SearchFile searchFile) {
+        if (pat.equals(null)) {
             try {
                 List<Path> list = search(file, path1 -> path1.toFile().getName().equals(fullNameMatchFile));
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        } else if (typeFound.equals("mask")) {
-            Pattern pat = Pattern.compile(fullNameMatchFile);
+        } else {
             try {
-                List<Path> list = search(file, path1 -> path1.toFile().getName().equals(pat.pattern()));
-                searchFile.writeFile(path, list);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else if (typeFound.equals("regex")) {
-            try {
-                Pattern pat = Pattern.compile(fullNameMatchFile);
-                List<Path> list = search(file, path1 -> path1.toFile().getName().equals(pat.matcher(path1.toFile().getName())));
+                List<Path> list = search(file, path1 -> pat.matcher(path1.toFile().getName()).matches());
                 searchFile.writeFile(path, list);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -73,8 +74,7 @@ public class SearchFile {
         }
         try (PrintWriter out = new PrintWriter(new FileWriter(directoryLog, true))) {
             for (Path p : list) {
-                out.write(p.toString());
-                out.write(System.lineSeparator());
+                out.println(p.toString());
             }
         } catch (IOException e) {
             e.printStackTrace();
