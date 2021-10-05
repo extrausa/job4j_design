@@ -17,4 +17,6 @@ CREATE TABLE person(person_id INTEGER NOT NULL PRIMARY KEY,
 					year SMALLINT);
 					
 CREATE TABLE band_person(band_id INTEGER REFERENCES band(band_id),
-						person_id INTEGER REFERENCES person(person_id)); 								
+						person_id INTEGER REFERENCES person(person_id));
+
+DROP TABLE
