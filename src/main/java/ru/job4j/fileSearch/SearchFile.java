@@ -18,12 +18,7 @@ public class SearchFile {
         String fullNameMatchFile = (argsName.get("n"));
         String nameFile = (argsName.get("o"));
         String typeFound = (argsName.get("t"));
-        File path = new File("./test", nameFile);
-//        Path file = Paths.get("/home/denis/IdeaProjects/job4j_design");
-//        String fullNameMatchFile = ("some?file.doc?");
-//        String nameFile = ("log.txt");
-//        String typeFound = ("mask");
-//        File path = new File("/home/denis/IdeaProjects/job4j_design/test", nameFile);
+        File path = new File("./", nameFile);
         searchFile.choice(typeFound, file, path, fullNameMatchFile, searchFile);
     }
 
