@@ -1,6 +1,5 @@
 package ru.job4j.map;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 public class TestIdea {

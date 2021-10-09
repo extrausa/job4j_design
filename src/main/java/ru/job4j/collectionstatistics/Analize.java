@@ -1,5 +1,5 @@
 package ru.job4j.collectionstatistics;
-//2. Статистику по коллекции. [#45889]
+/**2. Статистику по коллекции. [#45889]*/
 
 import java.util.*;
 

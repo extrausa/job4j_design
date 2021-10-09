@@ -4,25 +4,31 @@ import java.util.*;
 
 public class HomeWorck {
     public void convert(List<User> source) {
-
-        Map<String, User> emails = new HashMap<>(); //ключ - e-mail, значение - объект
-        Map<User, User> dups = new HashMap<>(); //ключ - пользователь, значение - основной пользователь
-        Set<User> unique = new HashSet<>(); // множество уникальных пользователей
+        /** ключ - e-mail, значение - объект*/
+        Map<String, User> emails = new HashMap<>();
+        /**ключ - пользователь, значение - основной пользователь */
+        Map<User, User> dups = new HashMap<>();
+        /** множество уникальных пользователей*/
+        Set<User> unique = new HashSet<>();
 
         for (User user : source) {
-            boolean isMainUser = true;  // Пока считаем, что пользователь основной
+            /**Пока считаем, что пользователь основной */
+            boolean isMainUser = true;
             for (String email : user.getEmails()) {
-                User prevUser = emails.putIfAbsent(email, user); // принимает значение непоредственно
-                // Уже есть пользователь с таким e-mail
+                /** принимает значение непоредственно*/
+                User prevUser = emails.putIfAbsent(email, user);
+                /**Уже есть пользователь с таким e-mail */
                 if (prevUser != null) {
-                    // достаем основного пользователя
+                    /**достаем основного пользователя */
                     prevUser = dups.getOrDefault(prevUser, prevUser);
-                    prevUser.emails.addAll(user.emails); // добавляем основному пользователю свои адреса
+                    /**добавляем основному пользователю свои адреса */
+                    prevUser.emails.addAll(user.emails);
                     dups.put(user, prevUser);
                     isMainUser = false;
                 }
             }
-            if (isMainUser) { // если все адреса были уникальными
+            /** если все адреса были уникальными*/
+            if (isMainUser) {
                 unique.add(user);
             }
         }

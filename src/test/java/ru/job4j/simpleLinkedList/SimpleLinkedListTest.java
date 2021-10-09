@@ -1,8 +1,6 @@
 package ru.job4j.simpleLinkedList;
 
-import junit.framework.TestCase;
 import org.junit.Test;
-import ru.job4j.simpleArray.SimpleArrayNew;
 
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
@@ -28,7 +26,6 @@ public class SimpleLinkedListTest {
         Linked<String> array = new SimpleLinkedList<>();
         array.addFirst("first");
         array.addLast("second");
-        //array.addFirst("throw");
         array.addLast("4th");
         Iterator<String> it = array.iterator();
         it.next();

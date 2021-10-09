@@ -1,7 +1,5 @@
 package ru.job4j.singleLinkList;
-//5. Очередь на двух стеках [#455137]
-import javax.security.auth.callback.CallbackHandler;
-import java.util.Iterator;
+/** Очередь на двух стеках [#455137]*/
 import java.util.NoSuchElementException;
 
 public class SimpleQueue<T> {
@@ -10,7 +8,6 @@ public class SimpleQueue<T> {
 
     public T poll() {
         T temp;
-        //if (in.size() == 0) {
         if (in.isEmpty() && out.isEmpty()) {
             throw new NoSuchElementException();
         }

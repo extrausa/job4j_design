@@ -95,18 +95,6 @@ public class HashTable<K, V> implements Iterable<K> {
 
             @Override
             public boolean hasNext() {
-//                if (valuesCounter == arraySize) {
-//                    return false;
-//                }
-//                if (hashArray[valuesCounter] == null) {
-//                    counterArray++;
-//                    while (counterArray < arraySize && hashArray[counterArray] == null) {
-//                        counterArray++;
-//                    }
-//                    valuesCounter = counterArray;
-//                    return  counterArray < arraySize && hashArray[counterArray] != null;
-//                }
-//                return true;
                 while (valuesCounter < hashArray.length && hashArray[valuesCounter] == null) {
 
                     valuesCounter++;

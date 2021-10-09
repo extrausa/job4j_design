@@ -1,6 +1,8 @@
 package ru.job4j.inputStream;
+/**
 //0.3. BufferedReader. [#252489]
 //0.4. BufferedOutputStream [#252490]
+ */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +31,10 @@ public class LogFilter {
         boolean point = false;
         if (log.size() > 0) {
             try (PrintWriter out = new PrintWriter(
-                    new BufferedOutputStream(//Первая обертка - это BufferedOutputStream. Это буфер, который собираем переданные в него байты
-                            new FileOutputStream(file) //Исходный поток ввода - это файл FileOutputStream.
+                    /**Первая обертка - это BufferedOutputStream. Это буфер, который собираем переданные в него байты */
+                    new BufferedOutputStream(
+                            /**Исходный поток ввода - это файл FileOutputStream. */
+                            new FileOutputStream(file)
                     ))) {
                 log.stream().forEach(s -> out.printf("%s%n", s));
                 point = true;

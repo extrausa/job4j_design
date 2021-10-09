@@ -1,6 +1,5 @@
 package ru.job4j.simpleArray;
-//1. Динамический список на массиве. [#455135]
-import java.lang.reflect.Array;
+/**1. Динамический список на массиве. [#455135]*/
 import java.util.*;
 
 public class SimpleArrayNew<T> implements Iterable<T> {
@@ -11,9 +10,6 @@ public class SimpleArrayNew<T> implements Iterable<T> {
     private int modCount;
 
     public SimpleArrayNew(int initialCapacity) {
-//        if (initialCapacity <= 0) {
-//            throw new IllegalArgumentException();
-//        }
         elementData = new Object[initialCapacity];
     }
 

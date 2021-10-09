@@ -1,5 +1,5 @@
 package ru.job4j.simpleLinkedList;
-//2. Создать контейнер на базе связанного списка [#455136]
+/**2. Создать контейнер на базе связанного списка [#455136]*/
 import java.util.*;
 
 public class SimpleLinkedList<E> implements Iterable<E>, Linked<E> {

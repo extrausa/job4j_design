@@ -1,5 +1,5 @@
 package ru.job4j.iterator;
-//1. Что такое итератор. [#455144]
+/**1. Что такое итератор. [#455144]*/
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

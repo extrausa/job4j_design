@@ -13,45 +13,25 @@ public class InOutJSON {
         final Pet pet = new Pet(true, 5, "Patrick",
                 new OwnerCard("Jack", "123-123"),
                 "Rick", "Mortilda");
-
-//        final Gson gson = new GsonBuilder().create();
-//        System.out.println(gson.toJson(pet));
-//
-//        final String petJson = gson.toJson(pet);
-//                "{"
-//                    + "\"puppy\":false,"
-//                    + "\"age\":13,"
-//                    + "\"nickname\":\"Cash\","
-//                    + "\"ownerCard\":"
-//                    + "{"
-//                            + "\"name\":\"Bob\","
-//                            + "\"phone\":\"125-129\""
-//                    + "},"
-//                    + "\"parents\":"
-//                        + "[\"Chip\",\"Dalesha\"]"
-//                + "}";
-//        final Pet petMod = gson.fromJson(petJson, Pet.class);
-//        System.out.println(petMod);
-
-        // Получаем контекст для доступа к АПИ
+        /** Получаем контекст для доступа к АПИ */
         JAXBContext context = JAXBContext.newInstance(Pet.class);
-        // Создаем сериализатор
+         /** Создаем сериализатор */
         Marshaller marshaller = context.createMarshaller();
-        // Указываем, что нам нужно форматирование
+         /** Указываем, что нам нужно форматирование */
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (StringWriter writer = new StringWriter()) {
-            // Сериализуем
+            /** Сериализуем */
             marshaller.marshal(pet, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        // Для десериализации нам нужно создать десериализатор
+         /** Для десериализации нам нужно создать десериализатор */
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try (StringReader reader = new StringReader(xml)) {
-            // десериализуем
+            /**десериализуем */
             Pet result = (Pet) unmarshaller.unmarshal(reader);
             System.out.println(result);
         }

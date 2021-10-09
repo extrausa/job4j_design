@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//7. Scanner [#504791]
+/**7. Scanner [#504791]*/
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -87,10 +87,12 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
+        /**
         //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
 //        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
 //        String delimiter = ";";
 //        String[] filter = new String[] {"name", "age", "education"};
+         */
         CSVReader reader = new CSVReader();
         if (args.length != 3) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");

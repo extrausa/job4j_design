@@ -1,5 +1,5 @@
 package ru.job4j.iterator;
-//5.1.1. Итератор для двухмерного массива int[][] [#455145]
+/**5.1.1. Итератор для двухмерного массива int[][] [#455145]*/
 import java.util.NoSuchElementException;
 import java.util.Iterator;
 
@@ -27,7 +27,6 @@ public class MatrixIt implements Iterator<Integer> {
 
     }
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     @Override
     public Integer next() {
       if (!hasNext()) {

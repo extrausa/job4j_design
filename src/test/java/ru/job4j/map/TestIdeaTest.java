@@ -1,6 +1,5 @@
 package ru.job4j.map;
 
-import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -30,7 +29,6 @@ public class TestIdeaTest {
                 new User("user5", new HashSet<String>(Arrays.asList(
                         "xyz@pisem.net")))
         );
-        //testIdea.merge();
     }
 
 }

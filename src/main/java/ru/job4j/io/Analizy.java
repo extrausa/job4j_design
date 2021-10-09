@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//2. Анализ доступности сервера. [#859]
+/**2. Анализ доступности сервера. [#859]*/
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,7 +8,6 @@ import java.util.List;
 
 public class Analizy {
 
-    @SuppressWarnings("checkstyle:WhitespaceAround")
     public static void unavailable(String source, String target) {
         List<String> separated = new ArrayList<>();
         List<String> queue = new LinkedList<>();

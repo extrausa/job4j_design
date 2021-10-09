@@ -2,7 +2,7 @@ package ru.job4j.store;
 
 import java.util.Objects;
 
-//5.2.2. Реализовать Store<T extends Base> [#455157]
+/**5.2.2. Реализовать Store<T extends Base> [#455157]*/
 public class RoleStore implements Store<Role> {
 
     private final Store<Role> store = new MemStore<>();
