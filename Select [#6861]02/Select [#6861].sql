@@ -5,7 +5,6 @@ CREATE TABLE fauna (
     discovery_date DATE
     );
 
-
 INSERT INTO fauna(name, avg_age, discovery_date) VALUES('fish', 5, TO_DATE('17/12/2015', 'DD/MM/YYYY'));
 INSERT INTO fauna(name, avg_age, discovery_date) VALUES('fish_pig', 5, TO_DATE('17/12/1949', 'DD/MM/YYYY'));
 INSERT INTO fauna(name, avg_age, discovery_date) VALUES('elephan', 5, null);
