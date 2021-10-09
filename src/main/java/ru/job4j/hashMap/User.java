@@ -1,5 +1,5 @@
 package ru.job4j.hashMap;
-//1. Создать модель User [#455163]
+/** Создать модель User [#455163]*/
 import java.util.Calendar;
 import java.util.Objects;
 

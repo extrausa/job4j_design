@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//6. Кодировка. [#862]
+/** Кодировка. [#862]*/
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -56,7 +56,6 @@ public class ConsoleChat {
             dataTemp.add(word);
             return "введите слово";
         }
-            //dataTemp.add(word);
             return STOP;
         }
 
@@ -86,9 +85,9 @@ public class ConsoleChat {
         }
 
         public static void main(String[]args) throws IOException {
-            //String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt"; // B
-            String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt"; // A
-            //String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";//B
+            /**String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt";*/
+            String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt";
+            /**String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";*/
             String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt"; //A
             ConsoleChat cc = new ConsoleChat(path, botAnswers);
             System.out.println("Введите слово");

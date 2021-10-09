@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//4.1. Сканирование файловой системы. [#106929]
+/**4.1. Сканирование файловой системы. [#106929]*/
 import java.io.IOException;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Path;

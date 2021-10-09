@@ -1,5 +1,5 @@
 package ru.job4j.generics;
-//0. Что такое обобщенные типы (generics) [#455158]
+/** Что такое обобщенные типы (generics) [#455158]*/
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -20,14 +20,12 @@ public class Generics {
         gen.printObject(third);
         System.out.println();
 
-        //gen.printBoundedWildCard(first);
         gen.printBoundedWildCard(second);
         gen.printBoundedWildCard(third);
         System.out.println();
 
         gen.printLowerBoundedWildCard(first);
         gen.printLowerBoundedWildCard(second);
-        //gen.printLowerBoundedWildCard(third);
     }
 
     public void printObject(List<?> list) {

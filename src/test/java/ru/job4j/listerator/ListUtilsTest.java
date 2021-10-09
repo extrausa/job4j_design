@@ -1,5 +1,5 @@
 package ru.job4j.listerator;
-//7. ListIterator [#455134]
+/**7. ListIterator [#455134]*/
 import org.hamcrest.core.Is;
 import org.junit.Test;
 

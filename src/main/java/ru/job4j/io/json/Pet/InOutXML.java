@@ -12,16 +12,16 @@ public class InOutXML {
         final Pet pet = new Pet(true, 5, "Patrick",
                 new OwnerCard("Jack", "123-123"),
                 "Rick", "Mortilda");
-        // Получаем контекст для доступа к АПИ
+        /** Получаем контекст для доступа к АПИ */
         JAXBContext context = JAXBContext.newInstance(Pet.class);
-        // Создаем сериализатор
+        /** Создаем сериализатор */
         Marshaller marshaller = context.createMarshaller();
-        // Указываем, что нам нужно форматирование
+        /** Указываем, что нам нужно форматирование */
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
         String xml = "";
         try (
                 StringWriter writer = new StringWriter()) {
-            // Сериализуем
+            /** Сериализуем */
             marshaller.marshal(pet, writer);
             xml = writer.getBuffer().toString();
             System.out.println(xml);

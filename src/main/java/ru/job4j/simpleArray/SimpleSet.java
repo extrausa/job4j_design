@@ -1,7 +1,6 @@
 package ru.job4j.simpleArray;
-//1. Реализовать коллекцию Set на массиве [#455160]
+/**1. Реализовать коллекцию Set на массиве [#455160]*/
 import java.util.Iterator;
-import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class SimpleSet<T> implements Set<T> {

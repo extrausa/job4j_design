@@ -1,5 +1,5 @@
 package ru.job4j.listerator;
-//7. ListIterator [#455134]
+/** ListIterator [#455134] */
 import java.util.*;
 import java.util.function.Predicate;
 

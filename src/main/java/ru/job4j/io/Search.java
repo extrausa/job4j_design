@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//5. Валидация параметров запуска. [#246865]
+/** Валидация параметров запуска. [#246865]*/
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -16,7 +16,7 @@ public class Search {
         }
         File file = new File(args[0]);
         Path start = file.toPath();
-        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/");
+        /**Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/");*/
         Scanner in = new Scanner(System.in);
         System.out.print("Введите искомые расширения(js, txt ....): ");
         String name = in.next();
@@ -26,8 +26,6 @@ public class Search {
 
         }
         in.close();
-
-        //search(start, p -> p.toFile().getName().endsWith("js")).forEach(System.out::println);
     }
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {

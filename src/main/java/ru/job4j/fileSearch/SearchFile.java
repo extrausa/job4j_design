@@ -1,5 +1,5 @@
 package ru.job4j.fileSearch;
-//2. Поиск файлов по критерию [#783]02
+/** Поиск файлов по критерию [#783]02 */
 
 import ru.job4j.io.ArgsName;
 import java.io.*;

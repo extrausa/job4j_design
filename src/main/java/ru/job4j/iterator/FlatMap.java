@@ -1,5 +1,5 @@
 package ru.job4j.iterator;
-//5.1.4. FlatMap для Iterator<Iterator> [#455143]
+/** 5.1.4. FlatMap для Iterator<Iterator> [#455143]*/
 import java.util.*;
 
 public class FlatMap<T> implements Iterator<T> {
@@ -22,7 +22,6 @@ public class FlatMap<T> implements Iterator<T> {
 
     @Override
     public T next() {
-        //check();
         if (!hasNext()) {
             throw new NoSuchElementException();
         }

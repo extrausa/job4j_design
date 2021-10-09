@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//1. Читаем файл конфигурации [#858]
+/** Читаем файл конфигурации [#858]*/
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Config {
 
-    private final String path; //"./data/pair_without_comment.properties;
+    private final String path;
     private final Map<String, String> values = new HashMap<String, String>();
 
     public Config(final String path) {

@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//5.1. Именованные аргументы [#295518]
+/** Именованные аргументы [#295518]*/
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;

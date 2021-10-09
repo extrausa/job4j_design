@@ -1,5 +1,5 @@
 package ru.job4j.simpleArray;
-// 5.2.1. Реализовать SimpleArray<T> [#455156]
+/** 5.2.1. Реализовать SimpleArray<T> [#455156]*/
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.NoSuchElementException;

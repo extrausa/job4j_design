@@ -1,5 +1,5 @@
 package ru.job4j.iterator;
-//5.1.2. Создать итератор четные числа [#455142]
+/**5.1.2. Создать итератор четные числа [#455142]*/
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 

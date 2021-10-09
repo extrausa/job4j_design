@@ -1,7 +1,9 @@
 package ru.job4j.io;
-//1. Log4j. Логирование системы. [#95335]00
-//2. Simple Loggin Facade 4 Java. [#268849]
-//3. Slf4j - вывод переменных. [#268852]00
+/**
+1. Log4j. Логирование системы. [#95335]00
+2. Simple Loggin Facade 4 Java. [#268849]
+3. Slf4j - вывод переменных. [#268852]00
+ */
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,5 +1,5 @@
 package ru.job4j.forwardLinked;
-//6. Перевернуть связанный список [#455138]
+/** Перевернуть связанный список [#455138]*/
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -31,15 +31,8 @@ public class ForwardLinked<T> implements Iterable<T> {
         if (isEmpty() || count == 1) {
             return false;
         }
-//        Node<T> headFirst = head;
-//        Node<T> tail = head.next;
-//        Node<T> third = tail.next;
-//
-//        headFirst.next = null;
-//        tail.next = headFirst;
-
-        Node<T> current = head; // текущий
-        Node<T> previous = null; //предыдущий
+        Node<T> current = head;
+        Node<T> previous = null;
 
         while (current != null) {
             Node<T> next = current.next;

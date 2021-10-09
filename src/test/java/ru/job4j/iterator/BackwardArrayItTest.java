@@ -1,6 +1,5 @@
 package ru.job4j.iterator;
 
-//import junit.framework.TestCase;
 import org.junit.Test;
 
 import java.util.NoSuchElementException;

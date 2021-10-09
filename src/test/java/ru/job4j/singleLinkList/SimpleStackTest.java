@@ -30,7 +30,6 @@ public class SimpleStackTest {
         stack.push(2);
         stack.push(3);
         stack.display();
-        //stack.pop();
         assertThat(stack.pop(), is(3));
     }
 

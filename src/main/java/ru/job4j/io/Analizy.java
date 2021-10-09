@@ -1,5 +1,5 @@
 package ru.job4j.io;
-//2. Анализ доступности сервера. [#859]
+/** Анализ доступности сервера. [#859] */
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
