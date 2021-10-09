@@ -2,9 +2,8 @@ package ru.job4j.map;
 
 import java.util.Objects;
 
-//вершины
-public class Vertex { // он же user и e-mail
-    public char label; // метка(наприме, 'A')
+public class Vertex {
+    public char label;
     public boolean wasVisited;
     public String name;
     public int numberName;
