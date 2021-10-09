@@ -87,12 +87,12 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws FileNotFoundException {
-        /**
-        //Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv");
-//        Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv");
-//        String delimiter = ";";
-//        String[] filter = new String[] {"name", "age", "education"};
-         */
+
+        /** Path start = Paths.get("/home/extrausa/IdeaProjects/job4j_design/test/table.csv"); */
+        /** Path start = Paths.get("/home/denis/IdeaProjects/job4j_design/test/table.csv"); */
+        /** String delimiter = ";"; */
+        /** String[] filter = new String[] {"name", "age", "education"}; */
+
         CSVReader reader = new CSVReader();
         if (args.length != 3) {
             throw new IllegalArgumentException("Root folder is null. Usage java -jar dir.jar ROOT_FOLDER.");

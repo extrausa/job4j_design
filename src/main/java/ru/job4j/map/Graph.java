@@ -11,7 +11,7 @@ public class Graph {
 
     public Graph() {
         this.vertexList = new Vertex[MAX_VERTS];
-        // Матрица смежности
+        /** Матрица смежности*/
         this.adjMat = new int[MAX_VERTS][MAX_VERTS];
         this.nVerts = 0;
 

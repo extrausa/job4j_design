@@ -1,5 +1,5 @@
 package ru.job4j.map;
-//Обход в глубину
+/**Обход в глубину*/
 public class StackX {
     private final int size = 20;
     private int[] st;

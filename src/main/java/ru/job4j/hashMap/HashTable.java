@@ -113,7 +113,6 @@ public class HashTable<K, V> implements Iterable<K> {
                 if (modCount != expectedModCount) {
                     throw new ConcurrentModificationException();
             }
-                //valuesCounter++;
                 return hashArray[valuesCounter++].getKey();
             }
         };

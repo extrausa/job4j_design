@@ -1,7 +1,7 @@
 package ru.job4j.inputStream;
 /**
-//0.3. BufferedReader. [#252489]
-//0.4. BufferedOutputStream [#252490]
+0.3. BufferedReader. [#252489]
+0.4. BufferedOutputStream [#252490]
  */
 import java.io.*;
 import java.util.ArrayList;

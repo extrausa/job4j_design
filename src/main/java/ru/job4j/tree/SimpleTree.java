@@ -1,7 +1,7 @@
 package ru.job4j.tree;
 /**
-//1. Создать элементарную структуру дерева [#455152]
-//2. Добавить метод boolean isBinary() [#1712 #69343]
+1. Создать элементарную структуру дерева [#455152]
+2. Добавить метод boolean isBinary() [#1712 #69343]
 */
 import java.util.*;
 import java.util.function.Predicate;

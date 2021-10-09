@@ -56,7 +56,6 @@ public class ConsoleChat {
             dataTemp.add(word);
             return "введите слово";
         }
-            //dataTemp.add(word);
             return STOP;
         }
 
@@ -87,9 +86,9 @@ public class ConsoleChat {
 
         public static void main(String[]args) throws IOException {
             /**String path = "/home/extrausa/IdeaProjects/job4j_design/test/textWord.txt"; */
-            String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt"; // A
+            String path = "/home/denis/IdeaProjects/job4j_design/test/textWord.txt";
             /**String botAnswers = "/home/extrausa/IdeaProjects/job4j_design/test/textAswer.txt";*/
-            String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt"; //A
+            String botAnswers = "/home/denis/IdeaProjects/job4j_design/test/textAswer.txt";
             ConsoleChat cc = new ConsoleChat(path, botAnswers);
             System.out.println("Введите слово");
             Scanner in = new Scanner(System.in);
