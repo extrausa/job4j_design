@@ -1,15 +1,13 @@
 package ru.job4j.map;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Graph {
     private final int MAX_VERTS = 20;
-    private Vertex[] vertexList; //массив Вершин
-
-    private int[][] adjMat; // матрица смежности
-
-    private int nVerts; // текущее количество вершин
+    /** массив Вершин*/
+    private Vertex[] vertexList;
+    /** матрица смежности*/
+    private int[][] adjMat;
+    /** текущее количество вершин*/
+    private int nVerts;
 
     public Graph() {
         this.vertexList = new Vertex[MAX_VERTS];
