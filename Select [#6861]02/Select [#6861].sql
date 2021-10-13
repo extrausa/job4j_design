@@ -14,7 +14,7 @@ INSERT INTO fauna(name, avg_age, discovery_date) VALUES('leon', 5, '17-12-1965')
 INSERT INTO fauna(name, avg_age, discovery_date) VALUES('monkey', 5, '17/12/1950');
 
 SELECT * FROM fauna WHERE name LIKE '%fish%';
-SELECT * FROM fauna WHERE avg_age > 0 BETWEEN avg_age < 10;
+idea_db=> SELECT avg_age FROM fauna WHERE avg_age BETWEEN 0 AND 5;
 SELECT * FROM fauna WHERE discovery_date IS null;
 SELECT * FROM fauna WHERE discovery_date <'01.01.1950';
 
