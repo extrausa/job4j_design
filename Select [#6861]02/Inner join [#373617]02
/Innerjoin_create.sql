@@ -12,6 +12,7 @@ CREATE TABLE book(
         author_id INT REFERENCES author(id),
         name_book TEXT,
         type TEXT
+
 );
 
 
