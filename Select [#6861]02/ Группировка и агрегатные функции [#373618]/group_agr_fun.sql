@@ -52,7 +52,7 @@ SELECT * FROM devices_people AS dp JOIN devices d ON dp.device_id = d.id;
 
 SELECT AVG(d.price) AS "Средняя цена устройств" FROM devices AS d;
 
-SELECT AVG(d.price), dp.people_id FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY dp.people_id;
+SELECT AVG(d.price), p.name FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY p.name;
 
-SELECT AVG(d.price), dp.people_id FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY dp.people_id HAVING AVG(d.price) > 4;
+SELECT AVG(d.price), p.name FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY p.name HAVING AVG(d.price) > 4;HAVING AVG(d.price) > 4;
 
