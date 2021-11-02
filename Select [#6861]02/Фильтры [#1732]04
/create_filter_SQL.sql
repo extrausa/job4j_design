@@ -23,16 +23,11 @@ WHERE p.name LIKE 'Мороженное%';
 
 SELECT p.name
 FROM product AS p
-WHERE expired_date IN (true);
+WHERE expired_date
+IN (true);
 
 SELECT max(p.price)
 FROM product AS p;
-
-SELECT t.name AS "имя_типа", sum(p.id) AS "количество"
-FROM product AS p
-JOIN type AS t
-ON p.type_id = t.id
-GROUP BY t.name;
 
 SELECT type.name AS "имя_типа", count(*) AS "количество"
 FROM product AS p
