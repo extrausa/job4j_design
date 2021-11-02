@@ -48,11 +48,23 @@ INSERT INTO devices_people (people_id, device_id) VALUES (8, 1), (8, 2), (8, 8),
 INSERT INTO devices_people (people_id, device_id) VALUES (9, 3), (9, 4), (9, 6), (9, 10);
 INSERT INTO devices_people (people_id, device_id) VALUES (10, 2), (10, 3), (10, 7), (10, 5);
 
-SELECT * FROM devices_people AS dp JOIN devices d ON dp.device_id = d.id;
+SELECT *
+FROM devices_people AS dp
+JOIN devices d
+ON dp.device_id = d.id;
 
-SELECT AVG(d.price) AS "Средняя цена устройств" FROM devices AS d;
+SELECT AVG(d.price) AS "Средняя цена устройств"
+FROM devices AS d;
 
-SELECT AVG(d.price), p.name FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY p.name;
+SELECT AVG(d.price), p.name
+FROM devices_people AS dp
+JOIN people p ON dp.people_id = p.id
+JOIN devices d ON dp.device_id = d.id
+GROUP BY p.name;
 
-SELECT AVG(d.price), p.name FROM devices_people AS dp JOIN people p ON dp.people_id = p.id JOIN devices d ON dp.device_id = d.id GROUP BY p.name HAVING AVG(d.price) > 4;HAVING AVG(d.price) > 4;
-
+SELECT AVG(d.price), p.name
+FROM devices_people AS dp
+JOIN people p ON dp.people_id = p.id
+JOIN devices d ON dp.device_id = d.id
+GROUP BY p.name
+HAVING AVG(d.price) > 4;
